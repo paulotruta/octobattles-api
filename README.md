@@ -29,29 +29,29 @@ In order to persist data, a MySQL database is used containing tables for each mo
 - protected $table_name (The table name as created in the database. By default, it is populated on construction with the class name in lowercase.)
 - Any number of variables defined as public in each class represents a table field.
 
-    ### Migrations
+### Migrations
 
-    This folder contains .sql files that should be imported prior to project usage, using either the command line or PHPMyAdmin for example. Each time a model class changes its configuration, the developer should go and reflect the changes in the respective .sql file in this folder.
+This folder contains .sql files that should be imported prior to project usage, using either the command line or PHPMyAdmin for example. Each time a model class changes its configuration, the developer should go and reflect the changes in the respective .sql file in this folder.
 
-    ### Fixtures
+### Fixtures
 
-    Fixtures are files named after the database table name, that contain a single array named $data representing the example database data that can be imported into the project using a model class method named "fixture_import".
+Fixtures are files named after the database table name, that contain a single array named $data representing the example database data that can be imported into the project using a model class method named "fixture_import".
 
-    Running the "import_all.php" file inside the Fixtures folder imports all records from all fixtures into the database.
-    If a fixture cannot be inserted due to database constraints, it is skipped.
+Running the "import_all.php" file inside the Fixtures folder imports all records from all fixtures into the database.
+If a fixture cannot be inserted due to database constraints, it is skipped.
 
 ## Libs
 
 This folder contains any number of php files with helper libraries for the API project. All libraries contained in this project were handwritten from scratch. Research links are present as initial comments in each helper file.
 
-    ### ORM
+### ORM
 
-    A class that implements the base ORM used by the model classes. Every database connection made throught the API project is done using either this class or a child model class.
+A class that implements the base ORM used by the model classes. Every database connection made throught the API project is done using either this class or a child model class.
 
-    This class implements the following methods:
-    - **save()** (Saves a class instance public variables into persistance)
-    - **from_raw()** (Receives a raw array of data to populate an Orm child class)
-    - **find()** (by exact value or via custom WHERE statement)
-    - **delete()** (Removes the persistent associated data entry from the database)
+This class implements the following methods:
+- **save()** (Saves a class instance public variables into persistance)
+- **from_raw()** (Receives a raw array of data to populate an Orm child class)
+- **find()** (by exact value or via custom WHERE statement)
+- **delete()** (Removes the persistent associated data entry from the database)
 
 
