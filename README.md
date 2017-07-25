@@ -15,16 +15,16 @@ This project is composed of two main files, namely index.php and Api.php
 
 ## Endpoints
 
-- Characters/<$character_id>
-- Battles/<$battle_id>
-- Languages/<$character_id>/<$language_name>
+- **Characters/<$character_id>** 
+- **Battles/<$battle_id>**
+- **Languages/<$character_id>/<$language_name>**
 
 Each endpoint configuration can be found in the "endpoints" folder, inside the php file with the filename as the respective endpoint name.
 Each one of these files implement a class for the Endpoint, having as methods the operations allowed over that endpoint, such as GET, POST, PUT, etc.
 
 ## Models
 
-In order to persist data, a MySQL database is used containing tables for each model representation. Each php file in the models folder contains a class representative of the respective database table, with class instance variables as meta information about the table, namely:
+In order to persist data, a MySQL database is used containing tables for each model representation. Each php file in the models folder contains a class that extends the libs/Orm class and is representative of the respective database table, with class instance variables as meta information about the table, namely:
  
 - protected $table_name (The table name as created in the database. By default, it is populated on construction with the class name in lowercase.)
 - Any number of variables defined as public in each class represents a table field.
@@ -44,5 +44,14 @@ In order to persist data, a MySQL database is used containing tables for each mo
 
 This folder contains any number of php files with helper libraries for the API project. All libraries contained in this project were handwritten from scratch. Research links are present as initial comments in each helper file.
 
+    ### ORM
+
+    A class that implements the base ORM used by the model classes. Every database connection made throught the API project is done using either this class or a child model class.
+
+    This class implements the following methods:
+    - **save()** (Saves a class instance public variables into persistance)
+    - **from_raw()** (Receives a raw array of data to populate an Orm child class)
+    - **find()** (by exact value or via custom WHERE statement)
+    - **delete()** (Removes the persistent associated data entry from the database)
 
 
