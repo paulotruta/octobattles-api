@@ -26,19 +26,19 @@ Each one of these files implement a class for the Endpoint, having as methods th
 
 In order to persist data, a MySQL database is used containing tables for each model representation. Each php file in the models folder contains a class representative of the respective database table, with class instance variables as meta information about the table, namely:
  
- - protected $table_name (The table name as created in the database. By default, it is populated on construction with the class name in lowercase.)
- - Any number of variables defined as public in each class represents a table field.
+- protected $table_name (The table name as created in the database. By default, it is populated on construction with the class name in lowercase.)
+- Any number of variables defined as public in each class represents a table field.
 
-### Migrations
+    ### Migrations
 
-This folder contains .sql files that should be imported prior to project usage, using either the command line or PHPMyAdmin for example. Each time a model class changes its configuration, the developer should go and reflect the changes in the respective .sql file in this folder.
+    This folder contains .sql files that should be imported prior to project usage, using either the command line or PHPMyAdmin for example. Each time a model class changes its configuration, the developer should go and reflect the changes in the respective .sql file in this folder.
 
-### Fixtures
+    ### Fixtures
 
-Fixtures are files named after the database table name, that contain a single array named $data representing the example database data that can be imported into the project using a model class method named "fixture_import".
+    Fixtures are files named after the database table name, that contain a single array named $data representing the example database data that can be imported into the project using a model class method named "fixture_import".
 
-Running the "import_all.php" file inside the Fixtures folder imports all records from all fixtures into the database.
-If a fixture cannot be inserted due to database constraints, it is skipped.
+    Running the "import_all.php" file inside the Fixtures folder imports all records from all fixtures into the database.
+    If a fixture cannot be inserted due to database constraints, it is skipped.
 
 ## Libs
 
