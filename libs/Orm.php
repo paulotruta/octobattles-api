@@ -59,6 +59,7 @@ abstract class Orm {
 			throw new \Exception( 'A database connection could not be established.' );
 		}
 
+		// TODO: Implement instantiation with persistant data when a valid id is passed. (model_from_db method).
 	}
 
 	/**
