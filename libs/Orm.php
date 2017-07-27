@@ -98,6 +98,19 @@ abstract class Orm {
 	}
 
 	/**
+	 * Returns the table name associated with this model class.
+	 * This is a lower character version of the class name, in plural form.
+	 *
+	 * @return string The table name used to persist data for the class instances.
+	 */
+	public static function get_table_name() {
+
+		$reflection = new \ReflectionClass( get_called_class() );
+		return strtolower( $reflection -> getShortName() ) . 's';
+
+	}
+
+	/**
 	 * Converts a raw data array into a child class instance.
 	 *
 	 * @param  array $data The "model_property_name => value" pairs array for the new model instance to feed from.
@@ -130,6 +143,7 @@ abstract class Orm {
 		if ( is_numeric( $id ) && $id > 0 ) {
 
 			$sql_query = 'SELECT * FROM "' . $this -> table_name . ' WHERE id = ' . $id;
+
 			$data = self::$pdo -> exec( $sql_query );
 			if ( self::$pdo -> errorCode() ) {
 				throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
@@ -141,5 +155,51 @@ abstract class Orm {
 
 		return $model_instance;
 
+	}
+
+	/**
+	 * Fins records in the database and returns them. Allows options array of value equality in rows, or a custom WHERE statement.
+	 *
+	 * @param array|string $where Array of value equality in rows, or custom string with where statement.
+	 * @return array An array of model class instances.
+	 * @throws \Exception Invalid parameters passed, or error executing MySQL query.
+	 */
+	public static function find( $where = null ) {
+
+		// TODO: Rather than inserting the value directly into the query, use prepared statements and parameters, which aren't vulnerable to SQL injection.
+		//
+		// http://www.php.net/manual/en/pdo.prepared-statements.php
+		// https://stackoverflow.com/questions/2304317/surround-string-with-quotes .
+		$result = array();
+		$sql_query = 'SELECT * FROM "' . $this -> table_name . ' ';
+
+		if ( is_array( $options ) ) {
+			// TODO: IMPLEMENT FIND BY OPTIONS.
+			$sql_query .= 'WHERE ';
+			foreach ( $where as $row_key => $value ) {
+				if ( ! is_numeric( $value ) ) {
+					$value = '"' . $value . '"';
+				}
+				$where_statement .= '"' . $row_key . '"=' . $value . ' AND ';
+			}
+			$sql_query = substr( $sql_query, 0, -4 );
+
+		} elseif ( is_string( $options ) ) {
+			$sql_query .= 'WHERE ' . $where;
+		} else {
+			throw new \Exception( 'Invalid parameters passed to ' . $this -> table_name . ' model find method.' );
+			return false;
+		}
+
+		$query_result = self::$pdo -> execute( $sql_query );
+		if ( self::$pdo -> errorCode() ) {
+			throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
+			return false;
+		}
+		foreach ( $query_result as $model_row ) {
+			$result[] = self::model_from_raw( $model_row );
+		}
+
+		return result;
 	}
 }
