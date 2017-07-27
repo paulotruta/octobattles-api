@@ -2,25 +2,78 @@
 
 class Api {
 
+	/**
+	 * The versions this api support.
+	 *
+	 * @var array
+	 */
 	private static $versions = array(
 		'v1.0',
 	);
 
+	/**
+	 * Allowed response formats.
+	 *
+	 * @var array
+	 */
 	private static $formats = array(
 		'json',
 	);
 
+	/**
+	 * Allowed request shcemes.
+	 *
+	 * @var array
+	 */
+	private static $schemes = array(
+		'http',
+		'https',
+	);
+
+	/**
+	 * The available endpoints. Each key represents the endpoint name, being the value thee regex for allowed parameters and respective types.
+	 *
+	 * @var array
+	 */
 	private static $endpoints = array(
 		'characters' => 'characters(?:/?([0-9]+)?)',
 	);
 
+	/**
+	 * Allowed Request Methods.
+	 *
+	 * @var array
+	 */
+	private static $methods = array(
+		'GET',
+		'POST',
+		'PUT',
+		'DELETE',
+		'OPTIONS',
+	);
+
+	/**
+	 * Request variable to hold information while handling a request.
+	 *
+	 * @var array
+	 */
 	private static $request = array(
 		'version' => null,
 		'format' => null,
 	);
 
+	/**
+	 * Holds the raw input data for a request.
+	 *
+	 * @var null
+	 */
 	public static $input = null;
 
+	/**
+	 * Holds the parsed input data (parameters) for a request.
+	 *
+	 * @var array
+	 */
 	public static $data = array();
 
 	const RESPONSE = array(
@@ -28,12 +81,10 @@ class Api {
 		'err' => 'ERROR',
 	);
 
-	/**
-	 * Each endpoint should define a valid regex containing the arguments and valid formats for them.
-	 *
-	 * @return string The regex of allowed parameters and types for a api endpoint extending this class.
-	 */
-	abstract protected function get_route_regex();
+	const TOKEN = array(
+		'REQUEST' => 'your-token',
+		'COOKIE' => 'token',
+	);
 
 	/**
 	 * Returns the main version being used in the API.
@@ -80,12 +131,134 @@ class Api {
 	}
 
 	/**
+	 * Checks if the scheme of request is valid.
+	 *
+	 * @param string $request_scheme The scheme from wich the request was made.
+	 * @return bool Self-explanatory
+	 */
+	public static function check_scheme( $request_scheme ) {
+		if ( in_array( $request_scheme, self::$schemes ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sets necessary response headers depending on request type and origin.
+	 *
+	 * @param  array $cookies Any cookies to be set on the response. Each cookie must be an iterative array representing the setcookie method arguments.
+	 */
+	public static function headers( $cookies = array() ) {
+
+		$ref = null;
+		if ( isset( $_SERVER['HTTP_ORIGIN'] ) ) {
+			$ref = $_SERVER['HTTP_ORIGIN'];
+		} elseif ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+			$ref = $_SERVER['HTTP_REFERER'];
+		}
+
+		$origin = '*';
+
+		if ( ! empty( $ref ) ) {
+			$ref_data = parse_url( $ref );
+
+			if ( ! empty( $ref_data ) && isset( $ref_data['scheme'] ) &&  self::check_scheme( $ref_data['scheme'] ) ) {
+				$origin = $ref_data['host'];
+
+				$origin = ( $origin == $_SERVER['HTTP_HOST'] ) ? $info['scheme'] . '://' . $origin : $origin;
+
+			}
+		}
+
+		// Time to actually generate the headers for the request.
+		header_remove( 'Set-Cookie' );
+		$headers = array(
+			'Access-Control-Allow-Origin' => null,
+			'Access-Control-Expose-Headers' => null,
+			'Access-Control-Allow-Header' => null,
+			'Access-Control-Allow-Credentials' => null,
+			'Access-Control-Allow-Methods' => null,
+			'Access-Control-Max-Age' => null,
+			'X-Authorization' => null,
+		);
+
+		if ( '*' == $origin || ! empty( $_SERVER['HTTP_ACCESS_CONTROL_HEADERS'] ) ) {
+			$headers['Access-Control-Allow-Origin'] = '*';
+			$headers['Access-Control-Expose_headers'] = 'x-authorization';
+			$headers['Access-Control-Allow-Headers'] = 'origin, content-type, accept, x-authorization';
+			$headers['X-Authorization'] = self::TOKEN['REQUEST'];
+		} else {
+			$headers['Access-Control-Allow-Origin'] = $origin;
+			$headers['Access-Control-Expose-Headers'] = 'cookie, set-cookie';
+			$headers['Access-Control-Allow-Header'] = 'origin, content-type, accept, cookie, set-cookie';
+			$headers['Access-Control-Allow-Credentials'] = 'true';
+
+			setcookie(
+				self::TOKEN['COOKIE'],
+				self::TOKEN['REQUEST'],
+				(time() + 86400 * 30),
+				'/',
+				'.' . $_SERVER['HTTP_HOST']
+			);
+
+			foreach ( $cookies as $cookie ) {
+				setcookie( ...$cookie );
+			}
+		}
+
+		$headers['Access-Control-Allow-Methods'] = implode( ', ', self::$methods );
+		$headers['Access-Control-Max-Age'] = '86400';
+
+		foreach ( $headers as $header_key => $header_value ) {
+			header( $header_key . ': ' . $header_value );
+		}
+
+	}
+
+	/**
+	 * Handling multipart request data for PUT requests.
+	 * See https://stackoverflow.com/questions/5483851/manually-parse-raw-http-data-with-php
+	 *
+	 * @param  string $input raw request input.
+	 * @param  array  $data Associative array of data.
+	 * @return array  The multipart parsed data.
+	 */
+	private function handle_multipart( $input, $data ) {
+
+		$matches = null;
+		preg_match( '/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches );
+		$request_boundary = $matches[1];
+
+		$request_blocks = preg_split( "/-+$boundary/", $input );
+		array_pop( $request_blocks );
+
+		foreach ( $blocks as $block ) {
+
+			if ( ! empty( $block ) ) {
+				// Parse the uploaded file.
+				if ( strpos( $block, 'application/octet-stream' ) !== false ) {
+					preg_match( '/name=\"([^\"]*)\".*stream[\n|\r]+([^\n\r].*)?$/s', $block, $matches );
+				} else {
+					preg_match( '/name=\"([^\"]*)\"[\n|\r]+([^\n\r].*)?\r$/s', $block, $matches );
+				}
+
+				$data[ $matches[1] ] = $matches[2];
+			}
+		}
+
+		return $data;
+
+	}
+
+	/**
 	 * Parses a request to the API using server input variable information.
 	 *
 	 * @return array|bool An array with information on endpoint name, method used and parameters passed in the request.
 	 */
-	public function parse_request() {
+	private function parse_request() {
 
+		$path = null;
 		$handle_name = null;
 		$request_parameters = null;
 		$method = null;
@@ -115,6 +288,7 @@ class Api {
 			preg_match( '/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches );
 			if ( isset( $matches[1] ) && strpos( self::$input, $matches[1] ) !== false ) {
 				// TODO: self::parse_raw_request(self::input, self::data).
+				self::handle_multipart( self::$input, self::$data );
 			} else {
 				parse_str( self::$input, self::$data );
 			}
@@ -150,35 +324,52 @@ class Api {
 
 	}
 
-	public static function handler() {
+	/**
+	 * Given a request array with keys "endpoint", "method" and "parameters", this method runs the respective request method.
+	 *
+	 * Example request array:
+	 * 	$request = array(
+	 * 		'endpoint => 'characters',
+	 * 		'method' => 'GET',
+	 * 		'arguments' => array(),
+	 * 	);
+	 *
+	 * @param  array|null $request A request array.
+	 * @throws \Exception When request invalid or endpoint method not existant.
+	 */
+	private static function run_endpoint_method( array $request = null ) {
+		if ( ! empty( $request ) ) {
+			$endpoint_classname = 'endpoints_' . ucfirst( $request['endpoint'] );
+			if ( class_exists( $endpoint_classname ) ) {
+				$endpoint_class = new $endpoint_classname();
+				if ( ! method_exists( $endpoint_class, $request['method'] ) ) {
+					// TODO: Send 404 error on invalid endpoint method request.
+					throw new \Exception( 'Request method not implemented for the ' . $endpoint_classname . ' endpoint.' );
+				}
 
-		$path = '/';
+				call_user_func_array(
+					array(
+						$endpoint_class,
+						$request['method'],
+					),
+					$request['parameters']
+				);
 
-		$request = self::parse_request();
-
-		if( ! $request ){
-			// TODO: Send 404 error on invalid request.
-		}
-
-		$endpoint_classname = 'endpoints_' . ucfirst( $request['endpoint'] );
-		if ( class_exists( $endpoint_classname ) ) {
-			$endpoint_class = new $endpoint_classname();
-			if ( ! method_exists( $endpoint_class, $request['method'] ) ) {
-				// TODO: Send 404 error on invalid endpoint method request.
-				throw new \Exception( 'Request method not implemented for the ' . $endpoint_classname . ' endpoint.' );
+			} else {
+				throw new \Exception( 'Unable to load endpoint class ' . $endpoint_class . ' to build a response.' );
 			}
-
-			call_user_func_array(
-				array(
-					$endpoint_class,
-					$request['method'],
-				),
-				$request['parameters']
-			);
-
 		} else {
-			throw new \Exception( 'Unable to load endpoint class ' . $endpoint_class . ' to build a response.' );
+			// TODO: Send 404 error.
+			throw new \Exception( 'Request not valid.' );
 		}
+	}
+
+	/**
+	 * Main API Handler.
+	 */
+	public static function handler() {
+		$request = self::parse_request();
+		self::run_endpoint_method( $request );
 	}
 
 }
