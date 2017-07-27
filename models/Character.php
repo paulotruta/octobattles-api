@@ -71,16 +71,17 @@ class Character extends Orm {
 	 */
 	public function save() {
 
-		// Check for characters with the same name that may still be alive.
-		$characters_same_name = $this -> find( array(
-			'name' => $this -> name,
-		) );
-		foreach ( $characters_same_name as $character ) {
-			if ( $character -> life_gauge > 0 ) {
-				return false;
+		if ( ! is_numeric( $this -> id ) || $this -> id <= 0 ) {
+			// Check for characters with the same name that may still be alive.
+			$characters_same_name = $this -> find( array(
+				'name' => $this -> name,
+			) );
+			foreach ( $characters_same_name as $character ) {
+				if ( $character -> life_gauge > 0 ) {
+					return false;
+				}
 			}
 		}
-
 		return parent::save();
 
 	}
@@ -102,13 +103,7 @@ class Character extends Orm {
 	 */
 	public function is_dead() {
 
-		$is_alive = false; // A character is considered dead until proved otherwise.
-
-		if ( $this -> id > 0 && $this -> life_gauge > 0 ) {
-			$is_alive = true;
-		}
-
-		return ! $is_alive;
+		return ! ( $this -> id > 0 && $this -> life_gauge > 0 );
 
 	}
 
