@@ -1,4 +1,4 @@
-#octobattles-api
+# Octobattles - API
 
 A pure PHP implementation of an API in order to centrally manage the octobattles game logic and data.
 
