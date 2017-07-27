@@ -158,7 +158,7 @@ abstract class Orm {
 	}
 
 	/**
-	 * Fins records in the database and returns them. Allows options array of value equality in rows, or a custom WHERE statement.
+	 * Finds records in the database and returns them. Allows options array of value equality in rows, or a custom WHERE statement.
 	 *
 	 * @param array|string $where Array of value equality in rows, or custom string with where statement.
 	 * @return array An array of model class instances.
