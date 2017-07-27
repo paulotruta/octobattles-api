@@ -38,7 +38,7 @@ abstract class Orm {
 	 * @param int $id The primary key for the record to be imediately loaded.
 	 * @throws \Exception When a database connection cannot be established.
 	 */
-	function __construct( $id ) {
+	function __construct( $id = 0 ) {
 
 		if ( empty( $id ) ) {
 			$this -> id = 0;
@@ -113,7 +113,33 @@ abstract class Orm {
 			$model_instance -> { $model_property -> getName() } = ( ! empty( $data[ $model_property -> getName() ] ) ) ? $data[ $model_property -> getName() ] : null;
 		}
 
-		return $model;
+		return $model_instance;
 	}
 
+	/**
+	 * Loads a database record into a child class instance, given the record's primary key.
+	 *
+	 * @param  int $id The database record primary key to load the information from.
+	 * @return Class|bool Child class instance of Orm with the record data filled and ready to use. False if not able to load a record successfully.
+	 * @throws \Exception In the case an SQL error occurs while executing the resulting generated query.
+	 */
+	public static function model_from_db( integer $id = null ) {
+
+		$model_instance = false;
+
+		if ( is_numeric( $id ) && $id > 0 ) {
+
+			$sql_query = 'SELECT * FROM "' . $this -> table_name . ' WHERE id = ' . $id;
+			$data = self::$pdo -> exec( $sql_query );
+			if ( self::$pdo -> errorCode() ) {
+				throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
+			} else {
+				// No SQL error ocurred, so we can safely fill our model with the raw obtained data.
+				$model_instance = self::model_from_raw( $data );
+			}
+		}
+
+		return $model_instance;
+
+	}
 }
