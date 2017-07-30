@@ -10,7 +10,7 @@
  * @version    0.1
  * @abstract
  */
-class Character extends Orm {
+class model_Character extends lib_Orm {
 
 	// //////////////////////////////.
 	// INSTANCE VARIABLES.
@@ -58,6 +58,7 @@ class Character extends Orm {
 	 */
 	public function __construct() {
 
+		parent::__construct();
 		$this -> save(); // Timestamp update is done directly via MySQL update.
 
 	}
@@ -70,19 +71,22 @@ class Character extends Orm {
 	 * @return int|boolean 1 in case of a successfull save, or false in case of error.
 	 */
 	public function save() {
-
-		if ( ! is_numeric( $this -> id ) || $this -> id <= 0 ) {
-			// Check for characters with the same name that may still be alive.
-			$characters_same_name = $this -> find( array(
-				'name' => $this -> name,
-			) );
-			foreach ( $characters_same_name as $character ) {
-				if ( $character -> life_gauge > 0 ) {
-					return false;
+		if ( ! empty( $this -> name ) ) {
+			if ( ! is_numeric( $this -> id ) || $this -> id <= 0 ) {
+				// Check for characters with the same name that may still be alive.
+				$characters_same_name = $this -> find( array(
+					'name' => $this -> name,
+				) );
+				foreach ( $characters_same_name as $character ) {
+					if ( $character -> life_gauge > 0 ) {
+						return false;
+					}
 				}
 			}
+			return parent::save();
 		}
-		return parent::save();
+
+		return false;
 
 	}
 
