@@ -1,7 +1,16 @@
 <?php
 
-
-
+/**
+ * The Api class for the octobattles project.
+ * Every api request made through the project is done using this class.
+ *
+ * This class will parse every server request and route it to the appropriate endpoint.
+ * Each endpoint is represented by a class in the endpoints folder, that extends this class.
+ *
+ * @package    octobattles-api
+ * @author     Paulo Truta
+ * @version    0.1
+ */
 class Api {
 
 	/**
@@ -173,12 +182,13 @@ class Api {
 		$origin = '*';
 
 		if ( ! empty( $ref ) ) {
+
 			$ref_data = parse_url( $ref );
 
 			if ( ! empty( $ref_data ) && isset( $ref_data['scheme'] ) &&  self::check_scheme( $ref_data['scheme'] ) ) {
 				$origin = $ref_data['host'];
 
-				$origin = ( $origin == $_SERVER['HTTP_HOST'] ) ? $info['scheme'] . '://' . $origin : $origin;
+				$origin = ( $origin == $_SERVER['HTTP_HOST'] ) ? $ref_data['scheme'] . '://' . $origin : $origin;
 
 			}
 		}
@@ -214,8 +224,10 @@ class Api {
 				'.' . $_SERVER['HTTP_HOST']
 			);
 
-			foreach ( $cookies as $cookie ) {
-				setcookie( ...$cookie );
+			if( is_array( $cookies ) ){
+				foreach ( $cookies as $cookie ) {
+					setcookie( ...$cookie );
+				}
 			}
 		}
 
@@ -268,7 +280,7 @@ class Api {
 	 *
 	 * @return array|bool An array with information on endpoint name, method used and parameters passed in the request.
 	 */
-	private function parse_request() {
+	private static function parse_request() {
 
 		$path = null;
 		$handle_name = null;
@@ -283,10 +295,29 @@ class Api {
 			$path = $_SERVER['REQUEST_URI'];
 		}
 
+		// $path = str_replace('~jpt/octobattles-api/', '', $path);	
+		$path = ( ! empty( $_GET['path'] ) ) ? $_GET['path'] : '';
+
+		if ( empty( $path ) ){
+			echo '
+				<html>
+					<h1>Octobattles API</h1>
+					<p><a href="https://github.com/paulotruta/octobattles-api">Check the repo</a></end>
+				</html>
+			';
+			return;
+		}
+
+		new lib_LogDebug( 'Request path', $path, false );
+
 		$request = null;
 		preg_match( '#^/?([^/]+?)/.+?\.(.+?)$#', $path, $request );
 
-		if ( ! $request || ! isset( $request_info[2] ) ) {
+		new lib_LogDebug( 'Request information based on path', $request );
+
+		if ( ( ! is_array( $request ) ) || ( ! isset( $request[2] ) ) ) {
+			// throw new \Exception( 'Invalid Request!' );
+			self::error_response();
 			return false;
 		}
 
@@ -307,6 +338,9 @@ class Api {
 		}
 
 		$method = strtolower( $_SERVER['REQUEST_METHOD'] );
+
+		new lib_LogDebug( 'Request method', $method, false );
+
 		if ( 'options' == $method ) {
 			self::outputHeaders();
 		} else {
@@ -315,9 +349,11 @@ class Api {
 			$url_format_part = '\.(?:' . implode( '|', self::$formats ) . ')';
 
 			foreach ( self::$endpoints as $endpoint_name => $endpoint_regex ) {
+
 				$current_regex = $url_version_part . $endpoint_regex . $url_format_part;
 				$request_parameters = null;
-				if ( preg_match( '#^' . $regex . '$#', $path, $request_parameters ) ) {
+				if ( preg_match( '#^' . $current_regex . '$#', $path, $request_parameters ) ) {
+					new lib_LogDebug( 'Endpoint name found', $endpoint_name, false );
 					$handle_name = $endpoint_name;
 					break; // WUT?
 				}
@@ -351,55 +387,66 @@ class Api {
 	 */
 	private static function run_endpoint_method( array $request = null ) {
 		if ( ! empty( $request ) ) {
-			$endpoint_classname = 'endpoints_' . ucfirst( $request['endpoint'] );
+			$endpoint_classname = 'endpoint_' . ucfirst( $request['endpoint'] );
+
+			new lib_LogDebug( 'Endpoint class name',  $endpoint_classname, false);
+
 			if ( class_exists( $endpoint_classname ) ) {
 				$endpoint_class = new $endpoint_classname();
+				
 				if ( ! method_exists( $endpoint_class, $request['method'] ) ) {
 					// TODO: Send 404 error on invalid endpoint method request.
 					self::error_response( 'Request method does not exist.' );
-					throw new \Exception( 'Request method not implemented for the ' . $endpoint_classname . ' endpoint.' );
+					// throw new \Exception( 'Request method not implemented for the ' . $endpoint_classname . ' endpoint.' );
+				} else {
+					call_user_func_array(
+						array(
+							$endpoint_class,
+							$request['method'],
+						),
+						( empty( $request['params'] ) ) ? array() : array( $request['params'] )
+					);
 				}
 
-				call_user_func_array(
-					array(
-						$endpoint_class,
-						$request['method'],
-					),
-					$request['parameters']
-				);
-
 			} else {
-				self::error_response( 'An error ocurred while fillind the request.' );
-				throw new \Exception( 'Unable to load endpoint class ' . $endpoint_class . ' to build a response.' );
+				self::error_response( 'Request endpoint does not exist.' );
+				// throw new \Exception( 'Unable to load endpoint class ' . $endpoint_classname . ' to build a response.' );
 			}
 		} else {
-			self::error_response( 'Request not valid.' );
-			throw new \Exception( 'Request not valid.' );
+			self::error_response( 'Request not valid. Please check that verison and format are correct, and the endpoint and method being called exist.' );
 		}
 	}
 
 	/**
 	 * Builds and outputs an error response.
 	 *
-	 * @param  integer     $code    The http error code to produce.
-	 * @param  string|null $context Error context to send.
+	 * @param  integer     $context The http error code to produce.
+	 * @param  string|null $code    Error context to send.
 	 */
-	private static function error_response( $context = null,  $code = 404 ) {
-		http_response_code( $code );
+	public static function error_response( $context = null, $code = 404 ) {
 
-		header( 'Content-type: application/' . self::$request['format'] . '; charset=utf-8' );
-		self::headers();
+		if ( API_DEBUG_LEVEL < 2 ) {
+			http_response_code( $code );
 
-		echo call_user_func_array(
-			self::$serializers[ self::$request['format'] ]['encoder'],
-			array(
+			header( 'Content-type: application/' . self::$request['format'] . '; charset=utf-8' );
+			self::headers();
+
+			if( empty( $context ) ) {
+				$context = 'Request not valid. Please check that verison and format are correct, and the endpoint and method being called exist.';
+			}
+
+			echo call_user_func_array(
+				self::$serializers[ self::$request['format'] ]['encoder'],
 				array(
-					'status' => self::RESPONSE['error'],
-					'info' => $context,
-				),
-			)
-		);
+					array(
+						'status' => self::RESPONSE['err'],
+						'info' => $context,
+					),
+				)
+			);
+		}
 
+		new lib_LogDebug( self::RESPONSE['err'] . ' RESPONSE', $context );
 	}
 
 	/**
@@ -409,30 +456,49 @@ class Api {
 	 * @param  array $meta Any metadata to output with the response.
 	 * @param  array $cookies Any cookies needed to send in the response headers.
 	 */
-	private static function response( array $output = null, array $meta = null, array $cookies = null ) {
+	public static function response( array $output = null, array $meta = null, array $cookies = null ) {
 
 		http_response_code( 200 );
-		header( 'Content-type: application/' . self::$request['format'] . '; charset=utf-8' );
-		self::headers( $cookies );
+		$meta['request_received_time'] = time();
 
-		echo call_user_func_array(
-			self::$serializers[ self::$request['format'] ]['encoder'],
-			array(
+		if ( API_DEBUG_LEVEL < 2 ) {
+			header( 'Content-type: application/' . self::$request['format'] . '; charset=utf-8' );
+			self::headers( $cookies );
+
+			echo call_user_func_array(
+				self::$serializers[ self::$request['format'] ]['encoder'],
 				array(
-					'metadata' => $meta,
-					'status' => self::RESPONSE['ok'],
-					'result' => $output,
-				),
+					array(
+						'metadata' => $meta,
+						'status' => self::RESPONSE['ok'],
+						'result' => $output,
+					),
+				)
+			);
+		}
+
+		new lib_LogDebug(
+			self::RESPONSE['ok'] . ' RESPONSE',
+			array(
+				'metadata' => $meta,
+				'status' => self::RESPONSE['ok'],
+				'result' => $output,
 			)
 		);
+
 	}
 
 	/**
 	 * Main API Handler.
 	 */
-	public static function handler() {
+	public static function start() {
 		$request = self::parse_request();
-		self::run_endpoint_method( $request );
+		if ( is_array( $request ) ) {
+
+			new lib_LogDebug( 'Request information for endpoint method',  $request );
+
+		 	self::run_endpoint_method( $request );
+		}
 	}
 
 }
