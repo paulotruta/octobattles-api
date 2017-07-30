@@ -50,8 +50,9 @@ A class that implements the base ORM used by the model classes. Every database c
 
 This class implements the following methods:
 - **save()** (Saves a class instance public variables into persistance)
-- **from_raw()** (Receives a raw array of data to populate an Orm child class)
-- **find()** (by exact value or via custom WHERE statement)
+- **model_from_raw( array $data )** (Receives a raw array of data to populate an Orm child class)
+- **model_from_db( int $id )**
+- **find( array $data|string $custom_where)** (by exact value or via custom WHERE statement)
 - **delete()** (Removes the persistent associated data entry from the database)
 
 
