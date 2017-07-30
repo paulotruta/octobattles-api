@@ -9,7 +9,7 @@
  * @version    0.1
  * @abstract
  */
-abstract class Orm {
+abstract class lib_Orm {
 
 	/**
 	 * The PHP Data Objects instance used to connect and access the MySQL Database
@@ -35,17 +35,16 @@ abstract class Orm {
 	/**
 	 * Constructs this class, making any necessary assignments and adjustments before being available as an instance.
 	 *
-	 * @param int $id The primary key for the record to be imediately loaded.
 	 * @throws \Exception When a database connection cannot be established.
 	 */
-	function __construct( $id = 0 ) {
+	public function __construct() {
 
 		if ( empty( $id ) ) {
 			$this -> id = 0;
 		}
 
 		$reflection = new \ReflectionClass( $this );
-		$this -> table_name = strtolower( $class -> getShortName() ) . 's'; // The corresponding table name equals the plural of the child class name in lower characters.
+		$this -> table_name = str_replace( array( 'model_', 'lib_' ), '', strtolower( $reflection -> getShortName() ) . 's' ); // The corresponding table name equals the plural of the child class name in lower characters, without the "model_" class name reference.
 
 		try {
 			$connection_details = 'mysql:host=' . API_DBHOST . ';dbname=' . API_DBNAME;
@@ -53,7 +52,7 @@ abstract class Orm {
 			$this -> pdo = new \PDO(
 				$connection_details,
 				API_DBUSER,
-				''
+				API_DBPASS
 			);
 		} catch ( \Exception $e ) {
 			throw new \Exception( 'A database connection could not be established.' );
@@ -73,26 +72,47 @@ abstract class Orm {
 
 		$result = 0;
 		$reflection = new \ReflectionClass( $this ); // See http://php.net/manual/en/class.reflectionclass.php.
-		$set_properties = array();
+		$set_statement = '';
 		$sql_query = '';
 
 		foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
-			$set_statement .= '"' . $property -> getName() . '"="' . $this->{ $property -> getName() } . '"'; // "Key"="Value" string pair for this property.
+			if ( ! empty( $this->{ $property -> getName() } ) ) {
+
+				$property_to_set = $this->{ $property -> getName() };
+				if ( ! is_numeric( $this->{ $property -> getName() } ) ) {
+					$property_to_set = '"' . $this->{ $property -> getName() } . '"';
+				}
+
+				$set_statement .= '' . $property -> getName() . '=' . $property_to_set . ', '; // "Key"="Value" string pair for this property.
+			}
 		}
+		$set_statement = substr( $set_statement, 0, -2 );
+
 
 		if ( $this -> id > 0 ) {
 			// Generate an update statement for a valid primary key value.
-			$sql_query = 'UPDATE "' . $this -> table_name . '" SET ' . $set_statement . ' WHERE id = ' . $this -> id;
+			$sql_query = 'UPDATE ' . $this -> table_name . ' SET ' . $set_statement . ' WHERE id = ' . $this -> id;
 		} else {
 			// Generate an insert statement for the new record to save.
-			$sql_query = 'INSERT INTO "' . $this -> table_name . '" SET id=' . $this -> id . ',' . $set_statement;
+			$sql_query = 'INSERT INTO ' . $this -> table_name . ' SET ' . $set_statement;
 		}
 
 		// Execute the generated query, throwing the respective error if it occurs.
-		$result = self::$pdo -> exec( $sql_query );
-		if ( self::$pdo -> errorCode() ) {
-			throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
+		$result = $this -> pdo -> exec( $sql_query );
+
+		if ( $result ) { // Redo model properties with possible auto generated data in MySQL insert / update query.
+			$record_id = $this -> pdo -> lastInsertId();
+			$this -> id = $record_id;
+			$new_data = $this -> raw_from_db( $record_id );
+			foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
+				$this->{ $property -> getName() } = $new_data[ $property -> getName() ];
+			}
+			
 		}
+
+		/*if ( $this -> pdo -> errorCode() ) {
+			throw new \Exception( $this -> pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
+		}*/	
 
 		return $result;
 	}
@@ -119,10 +139,9 @@ abstract class Orm {
 	public static function model_from_raw( array $data ) {
 
 		$model_class = new \ReflectionClass( get_called_class() );
-		$model_instance = $class -> newInstance();
+		$model_instance = $model_class -> newInstance();
 
-		foreach ( $model_class -> getProperties( \ReflectionProperty::PUBLIC ) as $model_property ) {
-
+		foreach ( $model_class -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $model_property ) {
 			$model_instance -> { $model_property -> getName() } = ( ! empty( $data[ $model_property -> getName() ] ) ) ? $data[ $model_property -> getName() ] : null;
 		}
 
@@ -132,29 +151,40 @@ abstract class Orm {
 	/**
 	 * Loads a database record into a child class instance, given the record's primary key.
 	 *
-	 * @param  int $id The database record primary key to load the information from.
+	 * @param  int  $id   The database record primary key to load the information from.
+	 * @param  bool $fill If the current object should be filled with the properties returned.
 	 * @return Class|bool Child class instance of Orm with the record data filled and ready to use. False if not able to load a record successfully.
 	 * @throws \Exception In the case an SQL error occurs while executing the resulting generated query.
 	 */
-	public static function model_from_db( integer $id = null ) {
+	public function model_from_db( $id = null ) {
 
 		$model_instance = false;
 
-		if ( is_numeric( $id ) && $id > 0 ) {
+		$data = $this -> raw_from_db( $id );
 
-			$sql_query = 'SELECT * FROM "' . $this -> table_name . ' WHERE id = ' . $id;
-
-			$data = self::$pdo -> exec( $sql_query );
-			if ( self::$pdo -> errorCode() ) {
-				throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
-			} else {
-				// No SQL error ocurred, so we can safely fill our model with the raw obtained data.
-				$model_instance = self::model_from_raw( $data );
-			}
+		if ( $data ) {
+			$model_instance = $this -> model_from_raw( $data );
 		}
 
 		return $model_instance;
 
+	}
+
+	/**
+	 * Returns raw data from database, given a valid id.
+	 *
+	 * @param  int $id The primary key for this record.
+	 * @return array|bool Information array or false if not found.
+	 */
+	private function raw_from_db( $id = null ) {
+
+		if ( is_numeric( $id ) && $id > 0 ) {
+			$sql_query = 'SELECT * FROM ' . $this -> table_name . ' WHERE id = ' . $id;	
+			$data = $this -> pdo -> query( $sql_query ) -> fetch();
+			return $data;
+		}
+
+		return false;
 	}
 
 	/**
@@ -164,42 +194,44 @@ abstract class Orm {
 	 * @return array An array of model class instances.
 	 * @throws \Exception Invalid parameters passed, or error executing MySQL query.
 	 */
-	public static function find( $where = null ) {
+	public function find( $where = null ) {
 
 		// TODO: Rather than inserting the value directly into the query, use prepared statements and parameters, which aren't vulnerable to SQL injection.
 		//
 		// http://www.php.net/manual/en/pdo.prepared-statements.php
 		// https://stackoverflow.com/questions/2304317/surround-string-with-quotes .
 		$result = array();
-		$sql_query = 'SELECT * FROM "' . $this -> table_name . ' ';
+		$where_statement = '';
+		$sql_query = 'SELECT * FROM ' . $this -> table_name . ' ';
 
-		if ( is_array( $options ) ) {
+		if ( is_array( $where ) ) {
 			// TODO: IMPLEMENT FIND BY OPTIONS.
 			$sql_query .= 'WHERE ';
 			foreach ( $where as $row_key => $value ) {
 				if ( ! is_numeric( $value ) ) {
 					$value = '"' . $value . '"';
 				}
-				$where_statement .= '"' . $row_key . '"=' . $value . ' AND ';
+				$sql_query .= '' . $row_key . '=' . $value . ' AND ';
 			}
 			$sql_query = substr( $sql_query, 0, -4 );
 
-		} elseif ( is_string( $options ) ) {
+		} elseif ( is_string( $where ) ) {
 			$sql_query .= 'WHERE ' . $where;
-		} else {
+		} /* else {
 			throw new \Exception( 'Invalid parameters passed to ' . $this -> table_name . ' model find method.' );
 			return false;
-		}
+		} */
 
-		$query_result = self::$pdo -> execute( $sql_query );
-		if ( self::$pdo -> errorCode() ) {
-			throw new \Exception( self::$pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
-			return false;
-		}
+		new lib_LogDebug( 'SQL Query to be executed in find method', $sql_query );
+
+		$query_result = $this -> pdo -> query( $sql_query ) -> fetchAll();
+
+		new lib_LogDebug( 'SQL Query result set', $query_result );
+
 		foreach ( $query_result as $model_row ) {
-			$result[] = self::model_from_raw( $model_row );
+			$result[] = $this -> model_from_raw( $model_row );
 		}
 
-		return result;
+		return $result;
 	}
 }
