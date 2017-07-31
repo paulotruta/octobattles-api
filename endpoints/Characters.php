@@ -12,14 +12,7 @@
  */
 class endpoint_Characters extends Api {
 
-	private $model;
-
-	/**
-	 * Custom constructor for this endpoint. Associates a model to the class that allows persistance of data and can be accessed by all methods of this class.
-	 */
-	function __construct() {
-		$this -> model = new model_Character();
-	}
+	use trait_OctobattlesType;
 
 	/**
 	 * Characters endpoint GET request handler.
@@ -32,8 +25,12 @@ class endpoint_Characters extends Api {
 		if ( isset( $params[1] ) ) {
 			// Return a single character.
 			$character = $this -> model -> model_from_db( intval( $params[1] ) );
-			$info = get_object_vars( $character );
-
+			if ( $character ) {
+				$info = get_object_vars( $character );
+			} else {
+				self::error_response( 'Character not found. Please provide a valid character id.' );
+				return false;
+			}
 		} else {
 			// Return the list of characters.
 			$characters_list = $this -> model -> find();
@@ -54,12 +51,23 @@ class endpoint_Characters extends Api {
 	 */
 	public function post( $params ) {
 
-		if ( empty( self::$data['name'] ) ) {
+		if ( ! empty( $params[1] ) ) {
+			parent::error_response( 'Editing a character after its creation is not allowed.' );
+			return false;
+		}
+
+		if ( empty( self::$data['name'] ) || empty( self::$data['type'] ) ) {
 			parent::error_response( 'Please provide the necessary arguments for this endpoint method.' );
 			return false;
 		}
 
+		if ( ! $this -> get_type( self::$data['type'] ) ) {
+			parent::error_response( 'Please provide a valid character type!' );
+			return false;
+		}
+
 		$this -> model -> name = self::$data['name'];
+		$this -> model -> type = self::$data['type'];
 		$persisted = $this -> model -> save();
 
 		if ( $persisted ) {
@@ -70,7 +78,34 @@ class endpoint_Characters extends Api {
 
 	}
 
+	/**
+	 * Characters endpoint DELETE request handler.
+	 *
+	 * @param array $params The request parameters for this endpoint method.
+	 */
 	public function delete( $params ) {
-		parent::response( array('message' => 'DELETE METHOD' ) );
+
+		if ( empty( $params[1] ) ) {
+			parent::error_response( 'It is not possible to delete all characters at once.' );
+			return false;
+		}
+
+		$character = $this -> model -> model_from_db( $params[1] );
+		if ( ! $character ) {
+			parent::error_response( 'Character not found. Please provide a valid character id.' );
+			return false;
+		}
+
+		$character_last_info = get_object_vars( $character );
+
+		if ( $character -> delete() ) {
+			parent::response( array(
+				'message' => 'Character deleted successfully.',
+				'info' => $character_last_info,
+			) );
+		} else {
+			parent::error_response( 'It was not possible to delete the character.' );
+		}
+
 	}
 }

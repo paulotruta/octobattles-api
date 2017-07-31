@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 30-Jul-2017 às 22:31
+-- Generation Time: 31-Jul-2017 às 00:52
 -- Versão do servidor: 10.1.23-MariaDB
 -- PHP Version: 7.1.5
 
@@ -25,18 +25,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `characters`
+-- Estrutura da tabela `languages`
 --
 
-CREATE TABLE IF NOT EXISTS `characters` (
+CREATE TABLE IF NOT EXISTS `languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `experience_points` int(11) NOT NULL DEFAULT '100',
-  `life_gauge` int(11) NOT NULL DEFAULT '100',
-  `last_checked` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `power_level` int(11) NOT NULL DEFAULT '1',
+  `wheight` int(11) NOT NULL DEFAULT '100',
+  `character_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `language_character` (`name`,`character_id`),
+  KEY `languages_ibfk_1` (`character_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `languages`
+--
+ALTER TABLE `languages`
+  ADD CONSTRAINT `languages_ibfk_1` FOREIGN KEY (`character_id`) REFERENCES `characters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

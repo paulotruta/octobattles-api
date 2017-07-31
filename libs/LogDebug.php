@@ -48,7 +48,7 @@ class lib_LogDebug extends lib_Orm {
 	 * @return bool If any log was output, either to console, screen or persistance, returns true.
 	 * @throws \Exception When the debug level is higher than 3.
 	 */
-	public function __construct( $message, $context = 'No context', $persist = true ) {
+	public function __construct( $message, $context = 'No context', $persist = false ) {
 
 		parent::__construct();
 

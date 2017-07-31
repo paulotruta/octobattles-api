@@ -79,11 +79,14 @@ abstract class lib_Orm {
 			if ( ! empty( $this->{ $property -> getName() } ) ) {
 
 				$property_to_set = $this->{ $property -> getName() };
-				if ( ! is_numeric( $this->{ $property -> getName() } ) ) {
-					$property_to_set = '"' . $this->{ $property -> getName() } . '"';
-				}
 
-				$set_statement .= '' . $property -> getName() . '=' . $property_to_set . ', '; // "Key"="Value" string pair for this property.
+				if ( null != $property_to_set ) {
+					if ( ! is_numeric( $this->{ $property -> getName() } ) ) {
+						$property_to_set = '"' . $this->{ $property -> getName() } . '"';
+					}
+
+					$set_statement .= '' . $property -> getName() . '=' . $property_to_set . ', '; // "Key"="Value" string pair for this property.
+				}
 			}
 		}
 		$set_statement = substr( $set_statement, 0, -2 );
@@ -97,6 +100,8 @@ abstract class lib_Orm {
 			$sql_query = 'INSERT INTO ' . $this -> table_name . ' SET ' . $set_statement;
 		}
 
+		var_dump($sql_query);
+
 		// Execute the generated query, throwing the respective error if it occurs.
 		$result = $this -> pdo -> exec( $sql_query );
 
@@ -107,7 +112,6 @@ abstract class lib_Orm {
 			foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
 				$this->{ $property -> getName() } = $new_data[ $property -> getName() ];
 			}
-			
 		}
 
 		/*if ( $this -> pdo -> errorCode() ) {
@@ -115,6 +119,29 @@ abstract class lib_Orm {
 		}*/	
 
 		return $result;
+	}
+
+	/**
+	 * Deletes a record from persistant database.
+	 *
+	 * @return bool True if success, False if not.
+	 */
+	public function delete() {
+
+		if ( is_numeric( $this -> id ) && $this -> id > 0 ) {
+
+			$reflection = new \ReflectionClass( $this );
+
+			$sql_query = 'DELETE FROM ' . $this -> table_name . ' WHERE id = ' . $this -> id;
+			$result = $this -> pdo -> exec( $sql_query );
+			if ( $result ) {
+				foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
+					$this->{ $property -> getName() } = null;
+				}
+				return $result;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -151,8 +178,7 @@ abstract class lib_Orm {
 	/**
 	 * Loads a database record into a child class instance, given the record's primary key.
 	 *
-	 * @param  int  $id   The database record primary key to load the information from.
-	 * @param  bool $fill If the current object should be filled with the properties returned.
+	 * @param  int $id    The database record primary key to load the information from.
 	 * @return Class|bool Child class instance of Orm with the record data filled and ready to use. False if not able to load a record successfully.
 	 * @throws \Exception In the case an SQL error occurs while executing the resulting generated query.
 	 */
@@ -179,7 +205,7 @@ abstract class lib_Orm {
 	private function raw_from_db( $id = null ) {
 
 		if ( is_numeric( $id ) && $id > 0 ) {
-			$sql_query = 'SELECT * FROM ' . $this -> table_name . ' WHERE id = ' . $id;	
+			$sql_query = 'SELECT * FROM ' . $this -> table_name . ' WHERE id = ' . $id;
 			$data = $this -> pdo -> query( $sql_query ) -> fetch();
 			return $data;
 		}
@@ -194,7 +220,7 @@ abstract class lib_Orm {
 	 * @return array An array of model class instances.
 	 * @throws \Exception Invalid parameters passed, or error executing MySQL query.
 	 */
-	public function find( $where = null ) {
+	public function find( $where = null, $raw = false ) {
 
 		// TODO: Rather than inserting the value directly into the query, use prepared statements and parameters, which aren't vulnerable to SQL injection.
 		//
@@ -228,9 +254,14 @@ abstract class lib_Orm {
 
 		new lib_LogDebug( 'SQL Query result set', $query_result );
 
-		foreach ( $query_result as $model_row ) {
-			$result[] = $this -> model_from_raw( $model_row );
+		if( ! $raw ){
+			foreach ( $query_result as $model_row ) {
+				$result[] = $this -> model_from_raw( $model_row );
+			}
+		} else {
+			$result = $query_result;
 		}
+		
 
 		return $result;
 	}

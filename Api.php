@@ -58,6 +58,8 @@ class Api {
 	 */
 	private static $endpoints = array(
 		'characters' => 'characters(?:/?([0-9]+)?)',
+		'types' => 'types(?:/?([a-z]+)?)',
+		'languages' => 'languages(?:/?([0-9]+)?)',
 	);
 
 	/**
@@ -97,6 +99,14 @@ class Api {
 	 */
 	public static $data = array();
 
+	/**
+	 * A model to the class that allows persistance of data. Only available to the endpoint classes extending the Api class that have a companion model class.
+	 *
+	 * @var Object
+	 */
+	protected $model;
+
+
 	const RESPONSE = array(
 		'ok' => 'OK',
 		'err' => 'ERROR',
@@ -106,6 +116,24 @@ class Api {
 		'REQUEST' => 'your-token',
 		'COOKIE' => 'token',
 	);
+
+	/**
+	 * Custom constructor for this endpoint. Associates a model to the class that allows persistance of data and can be accessed by all methods of endpoint classes extending this class.
+	 */
+	function __construct() {
+
+		$reflection = new \ReflectionClass( $this );
+		$endpoint_classname = strtolower( $reflection -> getShortName() );
+		$model_classname = 'model_' . substr( ucfirst( str_replace( 'endpoint_', '', $endpoint_classname ) ), 0, -1 );
+
+		if ( class_exists( $model_classname ) ) {
+			$this -> model = new $model_classname();
+			new lib_LogDebug( 'Associating ' . $model_classname . ' with ' . $endpoint_classname );
+		} else {
+			new lib_LogDebug( 'No model found for association with  ' . $endpoint_classname );
+			$this -> model = null;
+		}
+	}
 
 	/**
 	 * Returns the main version being used in the API.
@@ -352,6 +380,7 @@ class Api {
 
 				$current_regex = $url_version_part . $endpoint_regex . $url_format_part;
 				$request_parameters = null;
+
 				if ( preg_match( '#^' . $current_regex . '$#', $path, $request_parameters ) ) {
 					new lib_LogDebug( 'Endpoint name found', $endpoint_name, false );
 					$handle_name = $endpoint_name;
@@ -498,6 +527,13 @@ class Api {
 			new lib_LogDebug( 'Request information for endpoint method',  $request );
 
 		 	self::run_endpoint_method( $request );
+		} else {
+			self::error_response(
+				array(
+					'Endpoint not found or url params invalid. Available endpoints and respective parameters are below.',
+					self::$endpoints,
+				)
+			);
 		}
 	}
 

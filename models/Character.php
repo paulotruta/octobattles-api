@@ -23,9 +23,9 @@ class model_Character extends lib_Orm {
 	public $name;
 
 	/**
-	 * The type id associated with this character. Should be a valid Type record id.
+	 * The type name associated with this character. Should be a valid Type name.
 	 *
-	 * @var int
+	 * @var string
 	 */
 	public $type;
 
@@ -61,6 +61,21 @@ class model_Character extends lib_Orm {
 		parent::__construct();
 		$this -> save(); // Timestamp update is done directly via MySQL update.
 
+	}
+
+	/**
+	 * Each time a model is loaded from the db, the timestamp must be update
+	 *
+	 * @param  int $id The record id to load.
+	 * @return Object  A model instance with the loaded data.
+	 */
+	public function model_from_db( $id = null ) {
+		$model = parent::model_from_db( $id );
+		if ( $model ) {
+			$model -> save();
+		}
+
+		return $model;
 	}
 
 	/**
