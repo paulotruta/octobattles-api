@@ -6,6 +6,27 @@ All endpoints support the common request methods GET, POST, PUT, DELETE, OPTIONS
 
 Improve your octopus with your real life coding xp form github, and battle your coworkers!
 
+## Setup
+
+The following instructions assume apache is installed in the system.
+
+- Clone the repo to your public server directory.
+- Edit the file /etc/httpd/conf/extra/httpd-vhosts.conf and add the following:
+    `<VirtualHost *:80>
+        ServerAdmin your@email.com
+        DocumentRoot "/home/<userfolder>/public_html/octobattles-api"
+        ServerName api.octobattles.com
+        ServerAlias www.api.octobattles.com
+        ErrorLog "/var/log/httpd/octobattlesapi-error-log"
+        CustomLog "/var/log/httpd/octobattlesapi-access-log" common
+    </VirtualHost>` 
+- Edit /etc/hosts file and add:
+    `127.0.0.1  api.octobattles.com` 
+- Restart apache: `systemctl restart httpd`
+- Change the DBUSER, DBNAME, DBPASS globals in the index.php file.
+- Import every .sql file present in the /models/migrations/ folder.
+- Ready to go! `api.octobattles.com/v1.0/characters.json` should respond 200.  
+
 ## Project Structure
 
 This project is composed of two main files, namely index.php and Api.php
@@ -35,13 +56,6 @@ In order to persist data, a MySQL database is used containing tables for each mo
 
 This folder contains .sql files that should be imported prior to project usage, using either the command line or PHPMyAdmin for example. Each time a model class changes its configuration, the developer should go and reflect the changes in the respective .sql file in this folder.
 
-### Fixtures
-
-Fixtures are files named after the database table name, that contain a single array named $data representing the example database data that can be imported into the project using a model class method named "fixture_import".
-
-Running the "import_all.php" file inside the Fixtures folder imports all records from all fixtures into the database.
-If a fixture cannot be inserted due to database constraints, it is skipped.
-
 ## Libs
 
 This folder contains any number of php files with helper libraries for the API project. All libraries contained in this project were handwritten from scratch. Research links are present as initial comments in each helper file.
@@ -54,7 +68,10 @@ This class implements the following methods:
 - **save()** (Saves a class instance public variables into persistance)
 - **model_from_raw( array $data )** (Receives a raw array of data to populate an Orm child class)
 - **model_from_db( int $id )**
+- **raw_from_db( int $id )**
 - **find( array $data|string $custom_where)** (by exact value or via custom WHERE statement)
 - **delete()** (Removes the persistent associated data entry from the database)
 
+### LogDebug
 
+A class that allows logging to console, output and optionally persist logs. Instatiate with a message and any context that should be also saved to help troubleshoot problems.
