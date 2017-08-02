@@ -51,6 +51,8 @@ class endpoint_Languages extends Api {
 
 		if ( empty( $params[1] ) ) {
 			parent::error_response( 'A new language can only be added to a character. Please provide a character id as url parameter.' );
+		} elseif ( empty( self::$data['name'] ) ) {
+			parent::error_response( 'You must provide a valid language name in the request body.' );
 		} else {
 
 			if ( ! $this -> get_language( self::$data['name'] ) ) {
