@@ -60,6 +60,7 @@ class Api {
 		'characters' => 'characters(?:/?([0-9]+)?)',
 		'types' => 'types(?:/?([a-z]+)?)',
 		'languages' => 'languages(?:/?([0-9]+)?)',
+		'battles' => 'battles(?:/?([0-9]+)?)(?:/?([0-9]+)?)',
 	);
 
 	/**
@@ -118,7 +119,7 @@ class Api {
 	);
 
 	/**
-	 * Custom constructor for this endpoint. Associates a model to the class that allows persistance of data and can be accessed by all methods of endpoint classes extending this class.
+	 * Custom constructor for this class. Associates a model to the class that allows persistance of data and can be accessed by all methods of endpoint classes extending this class.
 	 */
 	function __construct() {
 
@@ -315,23 +316,24 @@ class Api {
 		$request_parameters = null;
 		$method = null;
 
-		if ( ! empty( $_SERVER['PATH_INFO'] ) ) {
-			$path = $_SERVER['PATH_INFO'];
-		} elseif ( ! empty( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], '?' ) > 0 ) {
-			$path = strstr( $_SERVER['REQUEST_URI'], '?', true );
-		} else {
-			$path = $_SERVER['REQUEST_URI'];
-		}
+		// Ideally htaccess would allow for this type of uri parsing.
+		// if ( ! empty( $_SERVER['PATH_INFO'] ) ) {
+		// 	$path = $_SERVER['PATH_INFO'];
+		// } elseif ( ! empty( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], '?' ) > 0 ) {
+		// 	$path = strstr( $_SERVER['REQUEST_URI'], '?', true );
+		// } else {
+		// 	$path = $_SERVER['REQUEST_URI'];
+		// }
 
-		// $path = str_replace('~jpt/octobattles-api/', '', $path);	
 		$path = ( ! empty( $_GET['path'] ) ) ? $_GET['path'] : '';
 
-		if ( empty( $path ) ){
+		if ( empty( $path ) ) {
 			echo '
-				<html>
+				<html><header><title>Octobattles API</title><body>
 					<h1>Octobattles API</h1>
+					<p>Available parameters: </p>' . json_decode( self::$endpoints ) . '
 					<p><a href="https://github.com/paulotruta/octobattles-api">Check the repo</a></end>
-				</html>
+				</body></html>
 			';
 			return;
 		}
@@ -344,7 +346,6 @@ class Api {
 		new lib_LogDebug( 'Request information based on path', $request );
 
 		if ( ( ! is_array( $request ) ) || ( ! isset( $request[2] ) ) ) {
-			// throw new \Exception( 'Invalid Request!' );
 			self::error_response();
 			return false;
 		}
@@ -358,7 +359,6 @@ class Api {
 			$matches = null;
 			preg_match( '/boundary=(.*)$/', $_SERVER['CONTENT_TYPE'], $matches );
 			if ( isset( $matches[1] ) && strpos( self::$input, $matches[1] ) !== false ) {
-				// TODO: self::parse_raw_request(self::input, self::data).
 				self::handle_multipart( self::$input, self::$data );
 			} else {
 				parse_str( self::$input, self::$data );
@@ -460,7 +460,7 @@ class Api {
 			header( 'Content-type: application/' . self::$request['format'] . '; charset=utf-8' );
 			self::headers();
 
-			if( empty( $context ) ) {
+			if ( empty( $context ) ) {
 				$context = 'Request not valid. Please check that verison and format are correct, and the endpoint and method being called exist.';
 			}
 
@@ -527,11 +527,13 @@ class Api {
 			new lib_LogDebug( 'Request information for endpoint method',  $request );
 
 		 	self::run_endpoint_method( $request );
+
 		} else {
 			self::error_response(
 				array(
 					'Endpoint not found or url params invalid. Available endpoints and respective parameters are below.',
 					self::$endpoints,
+					self::$data,
 				)
 			);
 		}
