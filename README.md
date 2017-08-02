@@ -19,6 +19,8 @@ This project is composed of two main files, namely index.php and Api.php
 - **Battles/<$battle_id>**
 - **Languages/<$character_id>/<$language_name>**
 
+[Click here to accees endpoint documentation with examples.](https://documenter.getpostman.com/view/2508915/octobattles-api/6mz5wax) 
+
 Each endpoint configuration can be found in the "endpoints" folder, inside the php file with the filename as the respective endpoint name.
 Each one of these files implement a class for the Endpoint, having as methods the operations allowed over that endpoint, such as GET, POST, PUT, etc.
 
