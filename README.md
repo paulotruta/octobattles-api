@@ -23,6 +23,7 @@ The following instructions assume apache is installed in the system.
 - Edit /etc/hosts file and add:
     `127.0.0.1  api.octobattles.com` 
 - Restart apache: `systemctl restart httpd`
+- Create an empty database using mysql (`CREATE DATABASE octobattles-api`).
 - Change the DBUSER, DBNAME, DBPASS globals in the index.php file.
 - Import every .sql file present in the /models/migrations/ folder.
 - Ready to go! `api.octobattles.com/v1.0/characters.json` should respond 200.  
@@ -36,9 +37,10 @@ This project is composed of two main files, namely index.php and Api.php
 
 ## Endpoints
 
-- **Characters/<$character_id>** 
-- **Battles/<$battle_id>**
-- **Languages/<$character_id>/<$language_name>**
+- **characters/<$character_id>** 
+- **battles/<$battle_id>**
+- **languages/<$character_id>/<$language_name>**
+- **types/<$type_name>**
 
 [Click here to accees endpoint documentation with examples.](https://documenter.getpostman.com/view/2508915/octobattles-api/6mz5wax) 
 
@@ -75,3 +77,7 @@ This class implements the following methods:
 ### LogDebug
 
 A class that allows logging to console, output and optionally persist logs. Instatiate with a message and any context that should be also saved to help troubleshoot problems.
+
+## Unit Tests
+
+Still not available. Instructions will appear here once ready.
