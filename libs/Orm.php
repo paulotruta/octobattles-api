@@ -76,17 +76,15 @@ abstract class lib_Orm {
 		$sql_query = '';
 
 		foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
-			if ( ! empty( $this->{ $property -> getName() } ) ) {
+			if ( null != $this->{ $property -> getName() } ) {
 
 				$property_to_set = $this->{ $property -> getName() };
 
-				if ( null != $property_to_set ) {
-					if ( ! is_numeric( $this->{ $property -> getName() } ) ) {
-						$property_to_set = '"' . $this->{ $property -> getName() } . '"';
-					}
-
-					$set_statement .= '' . $property -> getName() . '=' . $property_to_set . ', '; // "Key"="Value" string pair for this property.
+				if ( ! is_numeric( $this->{ $property -> getName() } ) ) {
+					$property_to_set = '"' . $this->{ $property -> getName() } . '"';
 				}
+
+				$set_statement .= '' . $property -> getName() . '=' . $property_to_set . ', '; // "Key"="Value" string pair for this property
 			}
 		}
 		$set_statement = substr( $set_statement, 0, -2 );
@@ -100,8 +98,6 @@ abstract class lib_Orm {
 			$sql_query = 'INSERT INTO ' . $this -> table_name . ' SET ' . $set_statement;
 		}
 
-		var_dump($sql_query);
-
 		// Execute the generated query, throwing the respective error if it occurs.
 		$result = $this -> pdo -> exec( $sql_query );
 
@@ -109,14 +105,11 @@ abstract class lib_Orm {
 			$record_id = $this -> pdo -> lastInsertId();
 			$this -> id = $record_id;
 			$new_data = $this -> raw_from_db( $record_id );
+
 			foreach ( $reflection -> getProperties( \ReflectionProperty::IS_PUBLIC ) as $property ) {
 				$this->{ $property -> getName() } = $new_data[ $property -> getName() ];
 			}
 		}
-
-		/*if ( $this -> pdo -> errorCode() ) {
-			throw new \Exception( $this -> pdo -> errorInfo()[2] ); // Directly route the pdo error message as the exception message.
-		}*/	
 
 		return $result;
 	}
@@ -264,5 +257,15 @@ abstract class lib_Orm {
 		
 
 		return $result;
+	}
+
+	/**
+	 * Escapes input data.
+	 *
+	 * @param  string $input data to escape.
+	 * @return string Data escaped with quotes.
+	 */
+	public function escape_data( $input ) {
+		return $this -> pdo -> quote( $input );
 	}
 }
