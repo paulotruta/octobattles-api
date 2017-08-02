@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 31-Jul-2017 às 23:24
+-- Generation Time: 02-Ago-2017 às 07:53
 -- Versão do servidor: 10.1.23-MariaDB
 -- PHP Version: 7.1.5
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `battles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `character1_id` int(11) NOT NULL,
   `character2_id` int(11) NOT NULL,
-  `victorious_character_id` int(11) NOT NULL,
+  `victorious_character_id` int(11) DEFAULT NULL,
   `battle_log` varchar(10000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `battle_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
