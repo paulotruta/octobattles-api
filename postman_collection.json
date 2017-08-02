@@ -1,0 +1,2751 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Octobattles API",
+		"_postman_id": "150ae039-ff65-0723-40aa-eb8dc029bc59",
+		"description": "Octobattles is a game that allows programmers to fight each other using their pet octopus and the programming languages available on public GitHub repositories.\n\nThe API allows creation of new characters, assignment of languages, and simulation of new battles.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Characters",
+			"description": "Character information and addition.\n\nCharacters are the programmer's pet, identified with its owner name on github, can fight for him using the most used programming languages as habilities.\n\nEach character can gain experience points and has a persistent life gauge.",
+			"item": [
+				{
+					"name": "api.octobattles.com/v1.0/characters.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters.json",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Obtain the complete list of characters created by all users in the game."
+					},
+					"response": [
+						{
+							"id": "09010931-5621-496b-a56d-a01b6317e65d",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters.json",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "test_user",
+											"description": "The user github username. Each user can only have one living creature at a given time.",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "charmer",
+											"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"_postman_previewtype": "parsed",
+							"header": [],
+							"cookie": [],
+							"responseTime": 0,
+							"body": "{\n    \"metadata\": {\n        \"request_received_time\": 1501633704\n    },\n    \"status\": \"OK\",\n    \"result\": [\n        {\n            \"name\": \"paulotruta\",\n            \"type\": \"geek\",\n            \"experience_points\": \"161\",\n            \"life_gauge\": \"48\",\n            \"last_checked\": \"2017-08-02 00:41:22\",\n            \"id\": \"22\"\n        },\n        {\n            \"name\": \"teck\",\n            \"type\": \"geek\",\n            \"experience_points\": \"140\",\n            \"life_gauge\": \"56\",\n            \"last_checked\": \"2017-08-02 00:41:26\",\n            \"id\": \"23\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/characters.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters.json",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Create a new character to be used in the game."
+					},
+					"response": [
+						{
+							"id": "c07f4af1-7c15-42d7-9e38-7a3255a4239b",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters.json",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "test_user",
+											"description": "The user github username. Each user can only have one living creature at a given time.",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "charmer",
+											"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "202",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:29:05 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 161,
+							"body": "{\"metadata\":{\"request_received_time\":1501633745},\"status\":\"OK\",\"result\":{\"name\":\"test_user\",\"type\":\"charmer\",\"experience_points\":\"100\",\"life_gauge\":\"100\",\"last_checked\":\"2017-08-02 01:29:05\",\"id\":\"25\"}}"
+						},
+						{
+							"id": "1f5aef6b-aab4-47f4-b008-573a7fb17254",
+							"name": "Error (missing parameters)",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters.json",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "test_user",
+											"description": "The user github username. Each user can only have one living creature at a given time.",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "92",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:31:32 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 63,
+							"body": "{\"status\":\"ERROR\",\"info\":\"Please provide the necessary arguments for this endpoint method.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/characters.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters.json",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Delete all characters in the game (DISABLED)."
+					},
+					"response": [
+						{
+							"id": "2da4be28-86d8-442c-8165-877dd9c0e3fe",
+							"name": "Example",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters.json",
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": ""
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": ""
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "80",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:30:55 GMT",
+									"description": ""
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": ""
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": ""
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": ""
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": 73,
+							"body": "{\"status\":\"ERROR\",\"info\":\"It is not possible to delete all characters at once.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/characters/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters/24.json",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Obtain details about a given character."
+					},
+					"response": [
+						{
+							"id": "377c43f8-de7a-4338-8f69-7518a889eef4",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters/25.json",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "test_user",
+											"description": "The user github username. Each user can only have one living creature at a given time.",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "charmer",
+											"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "202",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:32:25 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 66,
+							"body": "{\"metadata\":{\"request_received_time\":1501633945},\"status\":\"OK\",\"result\":{\"name\":\"test_user\",\"type\":\"charmer\",\"experience_points\":\"100\",\"life_gauge\":\"100\",\"last_checked\":\"2017-08-02 01:29:05\",\"id\":\"25\"}}"
+						},
+						{
+							"id": "03fd15ad-3753-40a8-a8d1-a6f8991eacf8",
+							"name": "Not found example",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters/29.json",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "test_user",
+											"description": "The user github username. Each user can only have one living creature at a given time.",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "charmer",
+											"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "85",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:32:46 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 68,
+							"body": "{\"status\":\"ERROR\",\"info\":\"Character not found. Please provide a valid character id.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/characters/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters/24.json",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Edit a character (DISABLED)."
+					},
+					"response": [
+						{
+							"id": "69eed11c-9705-44a8-9f92-dfaf9c03c951",
+							"name": "Disabled example",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters/24.json",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "82",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:33:19 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 73,
+							"body": "{\"status\":\"ERROR\",\"info\":\"Editing a character after its creation is not allowed.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/characters/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/characters/24.json",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"description": "The user github username. Each user can only have one living creature at a given time.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "charmer",
+									"description": "The character type. Check the /types/ GET endpoint for a list of available types.",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Delete a character, given its unique id."
+					},
+					"response": [
+						{
+							"id": "be29ea7b-b26a-4b2d-89ad-68976a4bf1c8",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/characters/24.json",
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "",
+										"disabled": true
+									}
+								],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": ""
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": ""
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "255",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:17:16 GMT",
+									"description": ""
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": ""
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": ""
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": ""
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": ""
+								}
+							],
+							"cookie": [],
+							"responseTime": 148,
+							"body": "{\"metadata\":{\"request_received_time\":1501633037},\"status\":\"OK\",\"result\":{\"message\":\"Character deleted successfully.\",\"info\":{\"name\":\"test_user\",\"type\":\"charmer\",\"experience_points\":\"100\",\"life_gauge\":\"100\",\"last_checked\":\"2017-08-02 01:11:59\",\"id\":\"24\"}}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Languages",
+			"description": "The languages endpoint allows getting information about all the available languages, or get specific information about a character hability levels of a language.",
+			"item": [
+				{
+					"name": "api.octobattles.com/v1.0/languages.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get meta information about all the available languages in the game.\nProgramming languages are the habilities used by characters to fight."
+					},
+					"response": [
+						{
+							"id": "097355a7-07b9-4705-ab40-075b0abc033d",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "1584",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:33:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 57,
+							"body": "{\"metadata\":{\"request_received_time\":1501634039},\"status\":\"OK\",\"result\":{\"javascript\":{\"base_power_level\":20,\"speed\":15,\"type\":\"charmer\",\"description\":\"Javascript is executed on the client side, Javascript is a relatively easy language, Extended functionality to web pages\"},\"java\":{\"base_power_level\":19,\"speed\":19,\"type\":\"cleaner\",\"description\":\"Java (the platform) has a very large and standard class library, some parts of which are very well written, Good portability (certainly better than that of nearly any compiled alternative), Lots of available code and third-party libraries\"},\"php\":{\"base_power_level\":18,\"speed\":18,\"type\":\"geek\",\"description\":\"It's a quick and easy server side scripting language for web development and general use. Large community, widely used. Most problems faced by a web developer have pre existing solutions. It works well with databases, file systems, images, et cetera.\"},\"python\":{\"base_power_level\":17,\"speed\":16,\"type\":\"functional\",\"description\":\"The main characteristics of a Python program is that it is easy to read,  It helps you think more clearly when writing programs, it requires less effort to write a Python program than to write one in another language like C++ or Java.\"},\"ruby\":{\"base_power_level\":16,\"speed\":17,\"type\":\"charmer\",\"description\":\"Solid. Reliable. Middle of the road.\"},\"c#\":{\"base_power_level\":15,\"speed\":20,\"type\":\"assassin\",\"description\":\"Learning C# will help you later on if you decide to learn harder programming languages (e.g. C or C++).  The programming style of C# is very similar to other C languages.\"}}}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/languages.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages.json",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": "Insert a new language in the game (DISABLED)."
+					},
+					"response": [
+						{
+							"id": "59b0f902-da62-45e0-af07-ea960ce0932c",
+							"name": "Disabled example",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages.json",
+								"method": "POST",
+								"header": [],
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "124",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:34:15 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 50,
+							"body": "{\"status\":\"ERROR\",\"info\":\"A new language can only be added to a character. Please provide a character id as url parameter.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/languages/.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages.json",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "c#",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Delete all languages from all characters (DISABLED)."
+					},
+					"response": [
+						{
+							"id": "6df78eae-c5fc-4701-a230-72f26b1a9c1c",
+							"name": "Disabled example",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages.json",
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									}
+								],
+								"body": {}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "84",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:34:37 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 63,
+							"body": "{\"status\":\"ERROR\",\"info\":\"Deleting all languages of all characters is not allowed.\"}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/languages/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages/23.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get the list of languages (habilities) used by a given character."
+					},
+					"response": [
+						{
+							"id": "52291f40-58b7-4611-9a44-d46d62b0adaf",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages/23.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "716",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:34:50 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 67,
+							"body": "{\"metadata\":{\"request_received_time\":1501634090},\"status\":\"OK\",\"result\":[{\"id\":\"30\",\"0\":\"30\",\"name\":\"php\",\"1\":\"php\",\"type\":\"geek\",\"2\":\"geek\",\"power_level\":\"18\",\"3\":\"18\",\"wheight\":\"100\",\"4\":\"100\",\"character_id\":\"23\",\"5\":\"23\"},{\"id\":\"33\",\"0\":\"33\",\"name\":\"javascript\",\"1\":\"javascript\",\"type\":\"charmer\",\"2\":\"charmer\",\"power_level\":\"20\",\"3\":\"20\",\"wheight\":\"100\",\"4\":\"100\",\"character_id\":\"23\",\"5\":\"23\"},{\"id\":\"34\",\"0\":\"34\",\"name\":\"ruby\",\"1\":\"ruby\",\"type\":\"charmer\",\"2\":\"charmer\",\"power_level\":\"16\",\"3\":\"16\",\"wheight\":\"100\",\"4\":\"100\",\"character_id\":\"23\",\"5\":\"23\"},{\"id\":\"36\",\"0\":\"36\",\"name\":\"c#\",\"1\":\"c#\",\"type\":\"assassin\",\"2\":\"assassin\",\"power_level\":\"15\",\"3\":\"15\",\"wheight\":\"100\",\"4\":\"100\",\"character_id\":\"23\",\"5\":\"23\"}]}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/languages/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages/23.json",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "c#",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Teach a character a new language. He will be able to level it up independently during battles."
+					},
+					"response": [
+						{
+							"id": "1362d613-1ede-493c-8e32-d9628bb8d58f",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages/23.json",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "c#",
+											"description": "",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "236",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 06:48:50 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 537,
+							"body": "{\"metadata\":{\"request_received_time\":1501656531},\"status\":\"OK\",\"result\":{\"message\":\"New language created correctly for character!\",\"info\":{\"name\":\"c#\",\"type\":\"assassin\",\"power_level\":\"15\",\"wheight\":\"100\",\"character_id\":\"23\",\"id\":\"39\"}}}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/languages/<character_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/languages/23.json",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "c#",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "Delete a language from a character."
+					},
+					"response": [
+						{
+							"id": "f7e8d9ed-7f0b-47bc-908a-3f86fba4516f",
+							"name": "Error message",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/languages/23.json",
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "c#",
+											"description": "",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "80",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 00:35:59 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 57,
+							"body": "{\"status\":\"ERROR\",\"info\":\"The given language was not found for this character.\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Types",
+			"description": "Types are the main characteristic that categorizes a character or a language. A character with a given type that attacks with languages that have the same type deal more damage.",
+			"item": [
+				{
+					"name": "api.octobattles.com/v1.0/types.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/types.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Obtain a list of the current available types in the game."
+					},
+					"response": [
+						{
+							"id": "91577a8d-cd54-41c9-84de-58a39b88d528",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/types.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "716",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 07:01:11 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 58,
+							"body": "{\"metadata\":{\"request_received_time\":1501657271},\"status\":\"OK\",\"result\":{\"geek\":{\"id\":1,\"description\":\"The geek type uses every necessary tool to accomplish the job. It is this way a neutral player that knows a little of everything.\"},\"assassin\":{\"id\":2,\"description\":\"An assassin provides deep knowlege of the internals, beating to death every other type in terms of speed.\"},\"functional\":{\"id\":3,\"description\":\"The functional knows calculus, and uses its power to overwhelm enemies with awesome single liners!\"},\"cleaner\":{\"id\":4,\"description\":\"Cleaners do the minimal exequible job, without traces. It just works!\"},\"charmer\":{\"id\":5,\"description\":\"Charmers always use the newest tools to Wow its adversaries.\"}}}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Battles",
+			"description": "This endpoint allows to get meta information about all battles, for a specific character or between specific oponents.\nIt also allows to trigger battles between two oponents.",
+			"item": [
+				{
+					"name": "api.octobattles.com/v1.0/battles.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/battles.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "List all the latest battles made between all octopus"
+					},
+					"response": [
+						{
+							"id": "d5b80e93-7ed8-415b-ac20-029270ab9d6e",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/battles.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 07:10:01 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 65,
+							"body": "{\"metadata\":{\"request_received_time\":1501657801},\"status\":\"OK\",\"result\":{\"message\":\"Last battles made between all octopus\",\"result\":[{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":null,\"battle_log\":\"'[[\\\"paulotruta (hp: 25) attacks teck (hp: 20) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 15) attacks paulotruta (hp: 25) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:05:37\",\"id\":\"25\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 15) attacks teck (hp: 15) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 10) attacks paulotruta (hp: 15) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:06:09\",\"id\":\"26\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:11:32\",\"id\":\"33\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:12:50\",\"id\":\"34\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:13:56\",\"id\":\"35\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:01\",\"id\":\"36\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:08\",\"id\":\"37\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:59\",\"id\":\"38\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:16:10\",\"id\":\"39\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:17:38\",\"id\":\"40\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":null,\"battle_timestamp\":\"2017-08-01 23:19:20\",\"id\":\"41\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:10\",\"id\":\"42\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:48\",\"id\":\"43\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:22:26\",\"id\":\"44\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 10.330578512397 damage\\\",\\\"teck (hp: 89.669421487603) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:00:45\",\"id\":\"45\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 90) attacks teck (hp: 90) with the c# language hability. Power level: 15; Wheight: 100. Took 10.392561983471 damage\\\",\\\"teck (hp: 79.607438016529) attacks paulotruta (hp: 90) with the php language hability. Power level: 18; Wheight: 100. Took 18.826446280992 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:22:13\",\"id\":\"46\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 71) attacks teck (hp: 80) with the c# language hability. Power level: 15; Wheight: 100. Took 10.30737704918 damage\\\",\\\"teck (hp: 69.69262295082) attacks paulotruta (hp: 71) with the php language hability. Power level: 18; Wheight: 100. Took 18.819672131148 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:23:03\",\"id\":\"47\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 52) attacks teck (hp: 70) with the c# language hability. Power level: 15; Wheight: 100. Took 10.223577235772 damage\\\",\\\"teck (hp: 59.776422764228) attacks paulotruta (hp: 52) with the php language hability. Power level: 18; Wheight: 100. Took 18.813008130081 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:25:00\",\"id\":\"48\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 33) attacks teck (hp: 60) with the c# language hability. Power level: 15; Wheight: 100. Took 10.141129032258 damage\\\",\\\"teck (hp: 49.858870967742) attacks paulotruta (hp: 33) with the php language hability. Power level: 18; Wheight: 100. Took 18.806451612903 damage\\\"],[\\\"paulotruta (hp: 14.193548387097) attacks teck (hp: 49.858870967742) with the javascript language hability. Power level: 20; Wheight: 100. Took 13.387096774194 damage\\\",\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.472049689441 damage\\\",\\\"paulotruta (hp: 7.7214986976558) attacks teck (hp: 36.471774193548) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:29:09\",\"id\":\"49\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 8) attacks teck (hp: 35) with the c# language hability. Power level: 15; Wheight: 100. Took 10.06 damage\\\",\\\"teck (hp: 24.94) attacks paulotruta (hp: 8) with the php language hability. Power level: 18; Wheight: 100. Took 18.8 damage\\\",\\\"paulotruta died.\\\"],false,[\\\"teck (hp: 24.94) attacks paulotruta (hp: -1) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.6211180124224 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:30:27\",\"id\":\"50\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.6730769230769 damage\\\",\\\"teck (hp: 90.326923076923) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.769230769231 damage\\\"],[\\\"paulotruta (hp: 81.230769230769) attacks teck (hp: 90.326923076923) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.769230769231 damage\\\",\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.7701863354037 damage\\\",\\\"paulotruta (hp: 74.460582895366) attacks teck (hp: 77.557692307692) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:34:15\",\"id\":\"51\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 77) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5992366412214 damage\\\",\\\"teck (hp: 67.400763358779) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.763358778626 damage\\\"],[\\\"paulotruta (hp: 55.236641221374) attacks teck (hp: 67.400763358779) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.671755725191 damage\\\",\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8198757763975 damage\\\",\\\"paulotruta (hp: 48.416765444977) attacks teck (hp: 54.729007633588) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:35:14\",\"id\":\"52\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 48) attacks teck (hp: 54) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5265151515152 damage\\\",\\\"teck (hp: 44.473484848485) attacks paulotruta (hp: 48) with the php language hability. Power level: 18; Wheight: 100. Took 18.757575757576 damage\\\"],[\\\"paulotruta (hp: 29.242424242424) attacks teck (hp: 44.473484848485) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.575757575758 damage\\\",\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8695652173913 damage\\\",\\\"paulotruta (hp: 22.372859025033) attacks teck (hp: 31.897727272727) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:10\",\"id\":\"53\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 22) attacks teck (hp: 31) with the c# language hability. Power level: 15; Wheight: 100. Took 9.4548872180451 damage\\\",\\\"teck (hp: 21.545112781955) attacks paulotruta (hp: 22) with the php language hability. Power level: 18; Wheight: 100. Took 18.751879699248 damage\\\"],[\\\"paulotruta (hp: 3.2481203007519) attacks teck (hp: 21.545112781955) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.481203007519 damage\\\",\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.9192546583851 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:21\",\"id\":\"54\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.2463235294118 damage\\\",\\\"teck (hp: 90.753676470588) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.735294117647 damage\\\"],[\\\"paulotruta (hp: 81.264705882353) attacks teck (hp: 90.753676470588) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.205882352941 damage\\\",\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.0683229813665 damage\\\",\\\"paulotruta (hp: 74.196382900986) attacks teck (hp: 78.547794117647) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:37:46\",\"id\":\"55\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1788321167883 damage\\\",\\\"teck (hp: 68.821167883212) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.729927007299 damage\\\"],[\\\"paulotruta (hp: 55.270072992701) attacks teck (hp: 68.821167883212) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.116788321168 damage\\\",\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.1180124223602 damage\\\",\\\"paulotruta (hp: 48.15206057034) attacks teck (hp: 56.704379562044) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:38:16\",\"id\":\"56\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1123188405797 damage\\\",\\\"teck (hp: 90.88768115942) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.724637681159 damage\\\"],[\\\"paulotruta (hp: 81.275362318841) attacks teck (hp: 90.88768115942) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.028985507246 damage\\\",\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.167701863354 damage\\\",\\\"paulotruta (hp: 74.107660455487) attacks teck (hp: 78.858695652174) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:41:29\",\"id\":\"57\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.0467625899281 damage\\\",\\\"teck (hp: 68.953237410072) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.719424460432 damage\\\"],[\\\"paulotruta (hp: 55.280575539568) attacks teck (hp: 68.953237410072) with the javascript language hability. Power level: 20; Wheight: 100. Took 11.942446043165 damage\\\",\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.2173913043478 damage\\\",\\\"paulotruta (hp: 48.063184235221) attacks teck (hp: 57.010791366906) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:42:08\",\"id\":\"58\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/battles/<charater_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/battles/23.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get a list of the latest battles for a given character."
+					},
+					"response": [
+						{
+							"id": "ab11d479-a633-4820-a8cc-25463ee468e5",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/battles/23.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 07:21:05 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 58,
+							"body": "{\"metadata\":{\"request_received_time\":1501658465},\"status\":\"OK\",\"result\":{\"message\":\"Last battles for character 23\",\"total\":28,\"last_created_battles\":[{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":null,\"battle_log\":\"'[[\\\"paulotruta (hp: 25) attacks teck (hp: 20) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 15) attacks paulotruta (hp: 25) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:05:37\",\"id\":\"25\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 15) attacks teck (hp: 15) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 10) attacks paulotruta (hp: 15) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:06:09\",\"id\":\"26\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:11:32\",\"id\":\"33\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:12:50\",\"id\":\"34\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:13:56\",\"id\":\"35\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:01\",\"id\":\"36\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:08\",\"id\":\"37\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:59\",\"id\":\"38\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:16:10\",\"id\":\"39\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:17:38\",\"id\":\"40\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":null,\"battle_timestamp\":\"2017-08-01 23:19:20\",\"id\":\"41\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:10\",\"id\":\"42\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:48\",\"id\":\"43\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:22:26\",\"id\":\"44\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 10.330578512397 damage\\\",\\\"teck (hp: 89.669421487603) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:00:45\",\"id\":\"45\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 90) attacks teck (hp: 90) with the c# language hability. Power level: 15; Wheight: 100. Took 10.392561983471 damage\\\",\\\"teck (hp: 79.607438016529) attacks paulotruta (hp: 90) with the php language hability. Power level: 18; Wheight: 100. Took 18.826446280992 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:22:13\",\"id\":\"46\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 71) attacks teck (hp: 80) with the c# language hability. Power level: 15; Wheight: 100. Took 10.30737704918 damage\\\",\\\"teck (hp: 69.69262295082) attacks paulotruta (hp: 71) with the php language hability. Power level: 18; Wheight: 100. Took 18.819672131148 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:23:03\",\"id\":\"47\"}],\"last_received_battles\":[{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 52) attacks teck (hp: 70) with the c# language hability. Power level: 15; Wheight: 100. Took 10.223577235772 damage\\\",\\\"teck (hp: 59.776422764228) attacks paulotruta (hp: 52) with the php language hability. Power level: 18; Wheight: 100. Took 18.813008130081 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:25:00\",\"id\":\"48\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 33) attacks teck (hp: 60) with the c# language hability. Power level: 15; Wheight: 100. Took 10.141129032258 damage\\\",\\\"teck (hp: 49.858870967742) attacks paulotruta (hp: 33) with the php language hability. Power level: 18; Wheight: 100. Took 18.806451612903 damage\\\"],[\\\"paulotruta (hp: 14.193548387097) attacks teck (hp: 49.858870967742) with the javascript language hability. Power level: 20; Wheight: 100. Took 13.387096774194 damage\\\",\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.472049689441 damage\\\",\\\"paulotruta (hp: 7.7214986976558) attacks teck (hp: 36.471774193548) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:29:09\",\"id\":\"49\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 8) attacks teck (hp: 35) with the c# language hability. Power level: 15; Wheight: 100. Took 10.06 damage\\\",\\\"teck (hp: 24.94) attacks paulotruta (hp: 8) with the php language hability. Power level: 18; Wheight: 100. Took 18.8 damage\\\",\\\"paulotruta died.\\\"],false,[\\\"teck (hp: 24.94) attacks paulotruta (hp: -1) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.6211180124224 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:30:27\",\"id\":\"50\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.6730769230769 damage\\\",\\\"teck (hp: 90.326923076923) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.769230769231 damage\\\"],[\\\"paulotruta (hp: 81.230769230769) attacks teck (hp: 90.326923076923) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.769230769231 damage\\\",\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.7701863354037 damage\\\",\\\"paulotruta (hp: 74.460582895366) attacks teck (hp: 77.557692307692) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:34:15\",\"id\":\"51\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 77) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5992366412214 damage\\\",\\\"teck (hp: 67.400763358779) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.763358778626 damage\\\"],[\\\"paulotruta (hp: 55.236641221374) attacks teck (hp: 67.400763358779) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.671755725191 damage\\\",\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8198757763975 damage\\\",\\\"paulotruta (hp: 48.416765444977) attacks teck (hp: 54.729007633588) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:35:14\",\"id\":\"52\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 48) attacks teck (hp: 54) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5265151515152 damage\\\",\\\"teck (hp: 44.473484848485) attacks paulotruta (hp: 48) with the php language hability. Power level: 18; Wheight: 100. Took 18.757575757576 damage\\\"],[\\\"paulotruta (hp: 29.242424242424) attacks teck (hp: 44.473484848485) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.575757575758 damage\\\",\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8695652173913 damage\\\",\\\"paulotruta (hp: 22.372859025033) attacks teck (hp: 31.897727272727) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:10\",\"id\":\"53\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 22) attacks teck (hp: 31) with the c# language hability. Power level: 15; Wheight: 100. Took 9.4548872180451 damage\\\",\\\"teck (hp: 21.545112781955) attacks paulotruta (hp: 22) with the php language hability. Power level: 18; Wheight: 100. Took 18.751879699248 damage\\\"],[\\\"paulotruta (hp: 3.2481203007519) attacks teck (hp: 21.545112781955) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.481203007519 damage\\\",\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.9192546583851 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:21\",\"id\":\"54\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.2463235294118 damage\\\",\\\"teck (hp: 90.753676470588) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.735294117647 damage\\\"],[\\\"paulotruta (hp: 81.264705882353) attacks teck (hp: 90.753676470588) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.205882352941 damage\\\",\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.0683229813665 damage\\\",\\\"paulotruta (hp: 74.196382900986) attacks teck (hp: 78.547794117647) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:37:46\",\"id\":\"55\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1788321167883 damage\\\",\\\"teck (hp: 68.821167883212) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.729927007299 damage\\\"],[\\\"paulotruta (hp: 55.270072992701) attacks teck (hp: 68.821167883212) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.116788321168 damage\\\",\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.1180124223602 damage\\\",\\\"paulotruta (hp: 48.15206057034) attacks teck (hp: 56.704379562044) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:38:16\",\"id\":\"56\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1123188405797 damage\\\",\\\"teck (hp: 90.88768115942) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.724637681159 damage\\\"],[\\\"paulotruta (hp: 81.275362318841) attacks teck (hp: 90.88768115942) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.028985507246 damage\\\",\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.167701863354 damage\\\",\\\"paulotruta (hp: 74.107660455487) attacks teck (hp: 78.858695652174) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:41:29\",\"id\":\"57\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.0467625899281 damage\\\",\\\"teck (hp: 68.953237410072) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.719424460432 damage\\\"],[\\\"paulotruta (hp: 55.280575539568) attacks teck (hp: 68.953237410072) with the javascript language hability. Power level: 20; Wheight: 100. Took 11.942446043165 damage\\\",\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.2173913043478 damage\\\",\\\"paulotruta (hp: 48.063184235221) attacks teck (hp: 57.010791366906) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:42:08\",\"id\":\"58\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/battles/<character1_id>/<character2_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/battles/23/22.json",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get the list of lattest battles between two oponnents."
+					},
+					"response": [
+						{
+							"id": "a840d77d-1f1a-4829-9413-ea2ed1ce4307",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/battles/23/22.json",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 07:22:26 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "Transfer-Encoding",
+									"key": "Transfer-Encoding",
+									"value": "chunked",
+									"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 56,
+							"body": "{\"metadata\":{\"request_received_time\":1501658546},\"status\":\"OK\",\"result\":{\"message\":\"Battles between character 23 and character 22\",\"total\":28,\"character1_initiated_battles\":[{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":null,\"battle_log\":\"'[[\\\"paulotruta (hp: 25) attacks teck (hp: 20) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 15) attacks paulotruta (hp: 25) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:05:37\",\"id\":\"25\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 15) attacks teck (hp: 15) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck (hp: 10) attacks paulotruta (hp: 15) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:06:09\",\"id\":\"26\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:11:32\",\"id\":\"33\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:12:50\",\"id\":\"34\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:13:56\",\"id\":\"35\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:01\",\"id\":\"36\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:08\",\"id\":\"37\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:14:59\",\"id\":\"38\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:16:10\",\"id\":\"39\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:17:38\",\"id\":\"40\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":null,\"battle_timestamp\":\"2017-08-01 23:19:20\",\"id\":\"41\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:10\",\"id\":\"42\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:21:48\",\"id\":\"43\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 5) attacks teck (hp: 5) with the c# language hability. Power level: 15; Wheight: 100. Took 5 damage\\\",\\\"teck died.\\\"]]'\",\"battle_timestamp\":\"2017-08-01 23:22:26\",\"id\":\"44\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"22\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 10.330578512397 damage\\\",\\\"teck (hp: 89.669421487603) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 10 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:00:45\",\"id\":\"45\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 90) attacks teck (hp: 90) with the c# language hability. Power level: 15; Wheight: 100. Took 10.392561983471 damage\\\",\\\"teck (hp: 79.607438016529) attacks paulotruta (hp: 90) with the php language hability. Power level: 18; Wheight: 100. Took 18.826446280992 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:22:13\",\"id\":\"46\"},{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 71) attacks teck (hp: 80) with the c# language hability. Power level: 15; Wheight: 100. Took 10.30737704918 damage\\\",\\\"teck (hp: 69.69262295082) attacks paulotruta (hp: 71) with the php language hability. Power level: 18; Wheight: 100. Took 18.819672131148 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:23:03\",\"id\":\"47\"}],\"character2_initiated_battles\":[{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 52) attacks teck (hp: 70) with the c# language hability. Power level: 15; Wheight: 100. Took 10.223577235772 damage\\\",\\\"teck (hp: 59.776422764228) attacks paulotruta (hp: 52) with the php language hability. Power level: 18; Wheight: 100. Took 18.813008130081 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:25:00\",\"id\":\"48\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 33) attacks teck (hp: 60) with the c# language hability. Power level: 15; Wheight: 100. Took 10.141129032258 damage\\\",\\\"teck (hp: 49.858870967742) attacks paulotruta (hp: 33) with the php language hability. Power level: 18; Wheight: 100. Took 18.806451612903 damage\\\"],[\\\"paulotruta (hp: 14.193548387097) attacks teck (hp: 49.858870967742) with the javascript language hability. Power level: 20; Wheight: 100. Took 13.387096774194 damage\\\",\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 36.471774193548) attacks paulotruta (hp: 14.193548387097) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.472049689441 damage\\\",\\\"paulotruta (hp: 7.7214986976558) attacks teck (hp: 36.471774193548) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:29:09\",\"id\":\"49\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 8) attacks teck (hp: 35) with the c# language hability. Power level: 15; Wheight: 100. Took 10.06 damage\\\",\\\"teck (hp: 24.94) attacks paulotruta (hp: 8) with the php language hability. Power level: 18; Wheight: 100. Took 18.8 damage\\\",\\\"paulotruta died.\\\"],false,[\\\"teck (hp: 24.94) attacks paulotruta (hp: -1) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.6211180124224 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:30:27\",\"id\":\"50\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.6730769230769 damage\\\",\\\"teck (hp: 90.326923076923) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.769230769231 damage\\\"],[\\\"paulotruta (hp: 81.230769230769) attacks teck (hp: 90.326923076923) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.769230769231 damage\\\",\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 77.557692307692) attacks paulotruta (hp: 81.230769230769) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.7701863354037 damage\\\",\\\"paulotruta (hp: 74.460582895366) attacks teck (hp: 77.557692307692) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:34:15\",\"id\":\"51\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 77) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5992366412214 damage\\\",\\\"teck (hp: 67.400763358779) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.763358778626 damage\\\"],[\\\"paulotruta (hp: 55.236641221374) attacks teck (hp: 67.400763358779) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.671755725191 damage\\\",\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 54.729007633588) attacks paulotruta (hp: 55.236641221374) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8198757763975 damage\\\",\\\"paulotruta (hp: 48.416765444977) attacks teck (hp: 54.729007633588) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:35:14\",\"id\":\"52\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 48) attacks teck (hp: 54) with the c# language hability. Power level: 15; Wheight: 100. Took 9.5265151515152 damage\\\",\\\"teck (hp: 44.473484848485) attacks paulotruta (hp: 48) with the php language hability. Power level: 18; Wheight: 100. Took 18.757575757576 damage\\\"],[\\\"paulotruta (hp: 29.242424242424) attacks teck (hp: 44.473484848485) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.575757575758 damage\\\",\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 31.897727272727) attacks paulotruta (hp: 29.242424242424) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.8695652173913 damage\\\",\\\"paulotruta (hp: 22.372859025033) attacks teck (hp: 31.897727272727) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:10\",\"id\":\"53\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 22) attacks teck (hp: 31) with the c# language hability. Power level: 15; Wheight: 100. Took 9.4548872180451 damage\\\",\\\"teck (hp: 21.545112781955) attacks paulotruta (hp: 22) with the php language hability. Power level: 18; Wheight: 100. Took 18.751879699248 damage\\\"],[\\\"paulotruta (hp: 3.2481203007519) attacks teck (hp: 21.545112781955) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.481203007519 damage\\\",\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 9.0639097744361) attacks paulotruta (hp: 3.2481203007519) with the ruby language hability. Power level: 16; Wheight: 100. Took 6.9192546583851 damage\\\",\\\"paulotruta died.\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:36:21\",\"id\":\"54\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.2463235294118 damage\\\",\\\"teck (hp: 90.753676470588) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.735294117647 damage\\\"],[\\\"paulotruta (hp: 81.264705882353) attacks teck (hp: 90.753676470588) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.205882352941 damage\\\",\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.547794117647) attacks paulotruta (hp: 81.264705882353) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.0683229813665 damage\\\",\\\"paulotruta (hp: 74.196382900986) attacks teck (hp: 78.547794117647) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:37:46\",\"id\":\"55\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1788321167883 damage\\\",\\\"teck (hp: 68.821167883212) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.729927007299 damage\\\"],[\\\"paulotruta (hp: 55.270072992701) attacks teck (hp: 68.821167883212) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.116788321168 damage\\\",\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 56.704379562044) attacks paulotruta (hp: 55.270072992701) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.1180124223602 damage\\\",\\\"paulotruta (hp: 48.15206057034) attacks teck (hp: 56.704379562044) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:38:16\",\"id\":\"56\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 100) attacks teck (hp: 100) with the c# language hability. Power level: 15; Wheight: 100. Took 9.1123188405797 damage\\\",\\\"teck (hp: 90.88768115942) attacks paulotruta (hp: 100) with the php language hability. Power level: 18; Wheight: 100. Took 18.724637681159 damage\\\"],[\\\"paulotruta (hp: 81.275362318841) attacks teck (hp: 90.88768115942) with the javascript language hability. Power level: 20; Wheight: 100. Took 12.028985507246 damage\\\",\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 78.858695652174) attacks paulotruta (hp: 81.275362318841) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.167701863354 damage\\\",\\\"paulotruta (hp: 74.107660455487) attacks teck (hp: 78.858695652174) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:41:29\",\"id\":\"57\"},{\"character1_id\":\"22\",\"character2_id\":\"23\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"paulotruta (hp: 74) attacks teck (hp: 78) with the c# language hability. Power level: 15; Wheight: 100. Took 9.0467625899281 damage\\\",\\\"teck (hp: 68.953237410072) attacks paulotruta (hp: 74) with the php language hability. Power level: 18; Wheight: 100. Took 18.719424460432 damage\\\"],[\\\"paulotruta (hp: 55.280575539568) attacks teck (hp: 68.953237410072) with the javascript language hability. Power level: 20; Wheight: 100. Took 11.942446043165 damage\\\",\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the javascript language hability. Power level: 20; Wheight: 100. Took 0 damage\\\"],[\\\"teck (hp: 57.010791366906) attacks paulotruta (hp: 55.280575539568) with the ruby language hability. Power level: 16; Wheight: 100. Took 7.2173913043478 damage\\\",\\\"paulotruta (hp: 48.063184235221) attacks teck (hp: 57.010791366906) with the python language hability. Power level: 17; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 00:42:08\",\"id\":\"58\"}]}}"
+						}
+					]
+				},
+				{
+					"name": "api.octobattles.com/v1.0/battles/<character1_id>/<character2_id>.json",
+					"request": {
+						"url": "api.octobattles.com/v1.0/battles/23/22.json",
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"description": "Initiate a battle between two characters. Each character will attack in turns using his habilities (Languages).\nBoth characters must exist, be alive and have at least one available language to attack."
+					},
+					"response": [
+						{
+							"id": "1ae40b5c-9264-4f9c-be06-7c0d2957b376",
+							"name": "Usage",
+							"originalRequest": {
+								"url": "api.octobattles.com/v1.0/battles/23/22.json",
+								"method": "POST",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+								},
+								{
+									"name": "Access-Control-Allow-Header",
+									"key": "Access-Control-Allow-Header",
+									"value": "",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "origin, content-type, accept, x-authorization",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": "Lets a server whitelist headers that browsers are allowed to access."
+								},
+								{
+									"name": "Access-Control-Expose_headers",
+									"key": "Access-Control-Expose_headers",
+									"value": "x-authorization",
+									"description": "Custom header"
+								},
+								{
+									"name": "Access-Control-Max-Age",
+									"key": "Access-Control-Max-Age",
+									"value": "86400",
+									"description": "Indicates how long the results of a preflight request can be cached in seconds."
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "Keep-Alive",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "725",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 02 Aug 2017 07:28:14 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Keep-Alive",
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100",
+									"description": "Custom header"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Apache/2.4.25 (Unix) PHP/7.1.5",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-Authorization",
+									"key": "X-Authorization",
+									"value": "your-token",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.5",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								}
+							],
+							"cookie": [],
+							"responseTime": 346,
+							"body": "{\"metadata\":{\"request_received_time\":1501658894},\"status\":\"OK\",\"result\":{\"character1\":{\"name\":null,\"type\":null,\"experience_points\":null,\"life_gauge\":null,\"last_checked\":null,\"id\":null},\"character2\":{\"name\":null,\"type\":null,\"experience_points\":null,\"life_gauge\":null,\"last_checked\":null,\"id\":null},\"battle\":{\"character1_id\":\"23\",\"character2_id\":\"22\",\"victorious_character_id\":\"23\",\"battle_log\":\"'[[\\\"teck (hp: 55) attacks paulotruta (hp: 41) with the c# language hability. Power level: 15; Wheight: 100. Took 6.8788819875776 damage\\\",\\\"paulotruta (hp: 34.121118012422) attacks teck (hp: 55) with the c# language hability. Power level: 15; Wheight: 100. Took 1 damage\\\"]]'\",\"battle_timestamp\":\"2017-08-02 08:28:14\",\"id\":\"60\"}}}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
