@@ -19,22 +19,24 @@ define( 'API_DBUSER', 'root' );
 define( 'API_DBPASS', 'jpteurotux' );
 
 // Autoload classes from the appropriate locations, only when needed.
-spl_autoload_register( function( $classname ) {
+// spl_autoload_register( function( $classname ) {
 
-	$classmodule = strtok( $classname, '_' );
+// 	$classmodule = strtok( $classname, '_' );
 
-	$classname = str_replace( $classmodule . '_', $classmodule . 's/', $classname );
+// 	$classname = str_replace( $classmodule . '_', $classmodule . 's/', $classname );
 
-	if ( API_DEBUG_LEVEL >= 2 ) {
-		echo 'Loading new class via autoloader: <br>';
-		var_dump( __DIR__ . '/' . $classname . '.php' );
-	}
+// 	if ( API_DEBUG_LEVEL >= 2 ) {
+// 		echo 'Loading new class via autoloader: <br>';
+// 		var_dump( __DIR__ . '/' . $classname . '.php' );
+// 	}
 
-	if ( file_exists( __DIR__ . '/' . $classname . '.php' ) ) {
-		require __DIR__ . '/' . $classname . '.php';
-	}
+// 	if ( file_exists( __DIR__ . '/' . $classname . '.php' ) ) {
+// 		require __DIR__ . '/' . $classname . '.php';
+// 	}
 
-});
+// });
+
+include( 'autoloader.php' );
 
 // Boot the api.
 Api::start();
